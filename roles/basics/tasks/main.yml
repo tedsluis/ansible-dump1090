@@ -1,0 +1,42 @@
+---
+# These task will install basic packages and do the basic configuration for a dump1090 host.
+
+
+# http://docs.ansible.com/ansible/apt_module.html
+
+- name: Install basic packages
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+  - apt-utils 
+  - cron 
+  - curl
+  - debhelper 
+  - dialog 
+  - git
+  - netcat 
+  - net-tools 
+  - nmap
+  - python2.7 
+  - vim
+  - wget
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+- lineinfile:
+  dest: /home/pi/.profile
+  regexp: '^alias ll='
+  staet: present
+  line: 'alias ll="ls -ls --color"'
+
+- lineinfile:
+  dest: /etc/vim/vimrc
+  regexp: '^"?syntax on'
+  state: present
+  line: 'syntax on'
+
+- lineinfile:
+  dest: /etc/rc.local
+  regexp: '^/home/pi/connect.dump.sh'
+  state: present
+  insertbefore: '^exit 0'
+  line: '/home/pi/connect.dump.sh'
