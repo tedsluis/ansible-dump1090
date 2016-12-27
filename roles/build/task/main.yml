@@ -10,7 +10,7 @@
   file: path={{ builddirectory }} state=directory
 
 - git:
-  repo: {{ repository }}
+  repo: {{ dump1090_repository }}
   dest: {{ builddirectory }}
   clone: yes
   update: yes
