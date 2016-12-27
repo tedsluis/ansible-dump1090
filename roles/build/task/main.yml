@@ -1,48 +1,18 @@
 ---
-# These tasks install dependecies packages, download source and build dump1090.
+# These tasks build dump1090.
 
-tasks:
+- name: Set non interactive mode
+  # set build environment variable
+  environment: 
+  DEBIAN_FRONTEND: noninteractive
 
-  - name: Install dump1090 dependecy packages
-    apt: update_cache=yes cache_valid_time=3600
-    apt: name={{ item }} state=latest
-    with_items:
-    - apt-utils 
-     - build-essential 
-     - ca-certificates 
-     - cron 
-     - curl
-     - debhelper 
-     - dialog 
-     - dpkg-dev 
-     - git
-     - librtlsdr-dev 
-     - librtlsdr0 
-     - libusb-1.0-0-dev 
-     - lighttpd 
-     - netcat 
-     - net-tools 
-     - pkg-config 
-     - python2.7 
-     - rtl-sdr 
-     - wget
+- name: Create build dir
+  file: path=/tmp/build state=directory
 
-  - name: Download & install rtl-sdr arm packages
-    apt: deb=https://github.com/mutability/librtlsdr/releases/download/v0.5.4_git-1/librtlsdr0_0.5.4.git-1_armhf.deb  
-    apt: deb=https://github.com/mutability/librtlsdr/releases/download/v0.5.4_git-1/librtlsdr-dev_0.5.4.git-1_armhf.deb 
-    apt: deb=https://github.com/mutability/librtlsdr/releases/download/v0.5.4_git-1/rtl-sdr_0.5.4.git-1_armhf.deb
+- git:
+  repo: https://github.com/tedsluis/dump1090.git
+  dest: /tmp/build
+  clone: yes
+  update: yes
 
-  - name: Upgrade all packages to the latest version
-    apt: upgrade=dist
-
-  - name: Edit policy file and set non interactive mode
-    # edit policy file
-    replace: dest=/usr/sbin/policy-rc.d regexp='exit 101' replace='exit 0' backup=no
-    # set build environment variable
-    environment: 
-      DEBIAN_FRONTEND: noninteractive
-
-  - name: Create build dir
-    file: path=/tmp/build state=directory
-
-  - shell: cd /tmp/build ; git clone https://github.com/tedsluis/dump1090.git ; cd /tmp/build/dump1090 ; dpkg-buildpackage 
+- shell: cd /tmp/build/dump1090 ; dpkg-buildpackage -b
