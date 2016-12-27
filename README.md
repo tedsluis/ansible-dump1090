@@ -1,10 +1,9 @@
 # ansible-dump1090
-Ansible playbooks for dump1090
+Ansible playbooks for dump1090. Make it so!
 
-Change the default location for ansible.cfg:
+Before start a playbook: Change the default location for ansible.cfg using:
 ````
 export ANSIBLE_CONFIG="$HOME/git/ansible-dump1090/ansible.cfg"
-
 ````
   
 Add your dump1090 hosts to the hosts file, for example:
