@@ -7,12 +7,12 @@
   DEBIAN_FRONTEND: noninteractive
 
 - name: Create build dir
-  file: path=/tmp/build state=directory
+  file: path={{ builddirectory }} state=directory
 
 - git:
-  repo: https://github.com/tedsluis/dump1090.git
-  dest: /tmp/build
+  repo: {{ repository }}
+  dest: {{ builddirectory }}
   clone: yes
   update: yes
 
-- shell: cd /tmp/build/dump1090 ; dpkg-buildpackage -b
+- shell: cd {{ builddirectory }}/dump1090 ; dpkg-buildpackage -b
