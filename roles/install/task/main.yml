@@ -1,16 +1,9 @@
 ---
 # These tasks install dump1090 and restart the web server.
 
-tasks:
+- name: Install dump1090
+  apt: deb=/tmp/build/dump1090-mutability_1.15~dev_armhf.deb
 
-  - name: Install dump1090
-    apt: deb=/tmp/build/dump1090-mutability_1.15~dev_armhf.deb
-
-  - name: Enable lighttpd dump1090
-    command: lighttpd-enable-mod dump1090
-    notify: restart lighttpd
-
-handlers:
-
-  - name: restart lighttpd
-    action: service name=lighttpd state=restarted
+- name: Enable lighttpd dump1090
+  command: lighttpd-enable-mod dump1090
+  notify: restart lighttpd
