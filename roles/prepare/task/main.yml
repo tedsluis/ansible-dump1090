@@ -7,7 +7,6 @@
   - apt-utils 
   - build-essential 
   - ca-certificates 
-  - collectd
   - cron 
   - curl
   - debhelper 
@@ -18,12 +17,9 @@
   - librtlsdr0 
   - libusb-1.0-0-dev 
   - lighttpd 
-  - netcat 
-  - net-tools 
   - pkg-config 
   - python2.7 
   - rtl-sdr 
-  - vim
   - wget
 
 # Download & install the rtl-sdr packages
