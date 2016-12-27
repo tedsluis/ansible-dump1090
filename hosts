@@ -1,0 +1,35 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers.
+
+# Raspberry Pi - Raspbian Jessie 4.4.38-v7+
+[raspbian]
+ted1090-1
+ted1090-2
+ted1090-3
+ted1090-4
+ted1090-5
+
+# Orange Pi 2 plus - Armbian 3.4.112-sun8i
+[armbian]
+ted1090-6
+ted1090-7
+
+[dump1090]
+ted1090-1
+ted1090-2
+ted1090-3
+ted1090-4
+ted1090-5
+ted1090-6
+ted1090-7
+
+
