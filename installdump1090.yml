@@ -1,0 +1,17 @@
+- name: prepare hosts
+  remote_user: pi
+
+  roles:
+    - prepare
+
+- name: clone from git & build dump1090
+  remote_user: pi
+
+  roles:
+    - build
+
+- name: install dump1090
+  remote_user: pi
+
+  roles:
+    - install
