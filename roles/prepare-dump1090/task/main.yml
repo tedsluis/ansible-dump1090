@@ -15,6 +15,7 @@
   - git
   - librtlsdr-dev 
   - librtlsdr0 
+  - libpython2.7
   - libusb-1.0-0-dev 
   - lighttpd 
   - pkg-config 
