@@ -16,6 +16,8 @@
   - net-tools 
   - nmap
   - python2.7 
+  - rsync
+  - scp
   - vim
   - wget
   become: true
