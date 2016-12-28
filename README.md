@@ -29,7 +29,7 @@ Ansible is open source software (maintained by Red Hat) and is used on a wide va
 Playbook                                                                                            | Description                                            | settings                    |
 ----------------------------------------------------------------------------------------------------|--------------------------------------------------------|-----------------------------|
 [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and configuration of host. | [roles/basics/tasks/main.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/main.yml) |
-[installdump1090.yml]([https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml)| Does the building and installation of dump1090.        | [group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090) group_vars/default](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/default)        |
+[installdump1090.yml]([https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml)| Does the building and installation of dump1090.        | [group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br> [group_vars/default](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/default)        |
   
 ## Install Ansible  
   
