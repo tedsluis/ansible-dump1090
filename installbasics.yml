@@ -1,0 +1,6 @@
+- name: install basic packages and configure basic settings.
+  hosts: ted1090-2
+  remote_user: pi
+  roles:
+  - basics
+
