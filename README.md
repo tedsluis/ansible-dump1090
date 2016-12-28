@@ -13,7 +13,7 @@ Use [Ansible](https://www.ansible.com/) playbooks to configure dump1090 hosts. A
     * [Add your dump1090 hosts to your Ansible 'hosts' file](#add-your-dump1090-hosts-to-your-ansible-hosts-file)
     * [Test Ansible](#test-ansible)
     * [Run a playbook](#run-a-playbook)
-    * [Logging](#Logging)
+    * [Logging](#logging)
     * [More info](#more-info)
   
 ## Why manage hosts using Ansible?  
