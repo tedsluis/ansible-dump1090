@@ -1,6 +1,6 @@
 ---
 # These task will install basic packages and do the basic configuration for a dump1090 host.
-
+# ted.sluis@gmail.com
 
 # http://docs.ansible.com/ansible/apt_module.html
 
@@ -18,24 +18,42 @@
   - python2.7 
   - vim
   - wget
+  become: true
 
 # http://docs.ansible.com/ansible/lineinfile_module.html
 
-- lineinfile:
-  dest: /home/pi/.profile
-  regexp: '^alias ll='
-  staet: present
-  line: 'alias ll="ls -ls --color"'
+- name: Insert alias ll into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias ll='
+    state: present
+    line: 'alias ll="ls -ls --color"'
+  become: true
 
-- lineinfile:
-  dest: /etc/vim/vimrc
-  regexp: '^"?syntax on'
-  state: present
-  line: 'syntax on'
+- name: Set vim syntax no (globaly)
+  lineinfile:
+    dest: /etc/vim/vimrc
+    regexp: '^"?syntax on'
+    state: present
+    line: 'syntax on'
+  become: true
 
-- lineinfile:
-  dest: /etc/rc.local
-  regexp: '^/home/pi/connect.dump.sh'
-  state: present
-  insertbefore: '^exit 0'
-  line: '/home/pi/connect.dump.sh'
+- name: Add /home/pi/connect.dump.sh to /etc/rc.local
+  lineinfile:
+    dest: /etc/rc.local
+    regexp: '^/home/pi/connect.dump.sh'
+    state: present
+    insertbefore: '^exit 0'
+    line: '/home/pi/connect.dump.sh &'
+  become: true
+
+- name: Update /etc/hosts from inventory
+  lineinfile: dest=/etc/hosts 
+    regexp='.*{{item}}$' 
+    line='{{hostvars[item].ansible_default_ipv4.address}} {{item}}' 
+    state=present
+  when: hostvars[item].ansible_default_ipv4.address is defined
+  with_items: '{{groups.all}}'
+  tags:
+    - hosts
+  become: true
