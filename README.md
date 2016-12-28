@@ -4,7 +4,6 @@ Use [Ansible](https://www.ansible.com/) playbooks for dump1090 hosts. Ansible, m
 ## Table of contents  
   
   * [ansible-dump1090](#ansible-dump1090)
-    * [Table of contents](#table-of-contents)
     * [Why manage hosts using Ansible?](#why-manage-hosts-using-ansible)
     * [Types of playbooks](#types-of-playbooks)
     * [Install Ansible](#install-ansible)
