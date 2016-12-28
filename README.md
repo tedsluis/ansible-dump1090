@@ -4,13 +4,19 @@ Use [Ansible](https://www.ansible.com/) playbooks for dump1090 hosts. Ansible, m
 ## Table of contents  
   
 
-## Why manage dump1090 hosts using Ansible?  
+## Why manage hosts using Ansible?  
   
+I have several raspberry pi's and orange pi's that run dump1090, piaware, dump1090-tools (collectd), etc. I reinstall them freqently. It takes a lot of steps to install all the packages and edit all the configuration files.  
+  
+It is hard to install new dump1090 devices in the same way. It is easy to forget steps or do it differtly. None of my dump1090 devices were the same until I started using Ansible.  
+  
+With Ansible I can
+
 * Keep control over the installed packages and configuration settings on your linux devices.
-* Configure Linux and the applications using 'code' instead doing it manually.
+* Configure Linux and the applications using 'code' instead of doing it manually.
 * Deploy packages and settings from one centralized management host.
 * Deploy updates rapidly over multiple hosts.
-* Guarantee that your devices are always in the correct same state after every reinstall.  
+* Guarantee that my devices are always in the correct same state after every reinstall.  
 
 Ansible just checks the state. If it is already in that right state, it does nothing. But if it isn't then Ansible will configure it in the right state!
   
@@ -20,10 +26,10 @@ Ansible is open source software (maintained by Red Hat) and is used on a wide va
   
 ## Types of playbooks  
   
-Playbook                                                                                            | Description                                            | settings                    |
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-(installbasics.yml)[https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml]     | Does the basic installation and configuration of host. | roles/basics/tasks/main.yml |
-(installdump1090.yml)[https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml] | Does the building and installation of dump1090.        | group_vars/dump1090         |
+|Playbook                                                                                            | Description                                            | settings                    |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|(installbasics.yml)[https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml]     | Does the basic installation and configuration of host. | roles/basics/tasks/main.yml |
+|(installdump1090.yml)[https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml] | Does the building and installation of dump1090.        | group_vars/dump1090         |
   
 ## Install Ansible  
   
@@ -36,7 +42,9 @@ Check here the installation notes for other linux distro's: http://docs.ansible.
     
 ## Generate SSH key  
   
-To let Ansible log in from a your management host to your dump1090 hosts it need a public and private SSH key. The public key '~/.ssh/id_rsa.pub' must but added to the 'home/pi/.ssh/authorized_keys' on your dump1090 hosts. The private key must be stored on your management host in /home/username/.ssh/id.rsa.  
+To let Ansible log in from a your management host to your dump1090 hosts it need a public and private SSH key.  
+The public key '~/.ssh/id_rsa.pub' must but added to the 'home/pi/.ssh/authorized_keys' on your dump1090 hosts.   
+The private key must be stored on your management host in /home/username/.ssh/id.rsa.  
 
 If you don't have a private and public SSH key yet you can generate them on your Ansible management host like this:
   
@@ -107,6 +115,9 @@ $ mkdir git
 $ cd git
 $ git clone https://github.com/tedsluis/ansible-dump1090.git
 $ cd ansible-dump1090
+````
+Check the results:   
+````
 $ ls -l
 total 80
 -rw-r--r--. 1 tedsluis tedsluis 14035 Dec 27 21:50 ansible.cfg
@@ -127,6 +138,7 @@ Before start any playbook: Change the default location for ansible.cfg on your A
 ````
 export ANSIBLE_CONFIG="$HOME/git/ansible-dump1090/ansible.cfg"
 ````
+Add this line to your '~/.profile', to be sure it is set every time you use Ansible.  
     
 ## Add your dump1090 hosts to your Ansible 'hosts' file
   
