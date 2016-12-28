@@ -113,12 +113,35 @@
 
 # Add hosts from Ansible inventory to /etc/hosts
 - name: Update /etc/hosts from inventory
-  lineinfile: dest=/etc/hosts 
-    regexp='.*{{item}}$' 
-    line='{{hostvars[item].ansible_default_ipv4.address}} {{item}}' 
-    state=present
+  lineinfile: 
+    dest: /etc/hosts 
+    regexp: '.*{{item}}$' 
+    line: '{{hostvars[item].ansible_default_ipv4.address}} {{item}}' 
+    state: present
   when: hostvars[item].ansible_default_ipv4.address is defined
   with_items: '{{groups.all}}'
   tags:
     - hosts
   become: true
+
+# http://docs.ansible.com/ansible/cron_module.html
+
+# cron jobs: weekly update & reboot
+- cron:
+    name: "schedule apt-get update & upgrade every cronjob friday 0am."
+    minute: "0"
+    hour: "0"
+    weekday: "5"
+    job: "sudo apt-get update && sudo apt-get upgrade -y"
+  become: true
+- cron:
+    name: "schedule reboot cronjob every friday 3am."
+    minute: "0"
+    hour: "3"
+    weekday: "5"
+    job: "sudo /sbin/reboot"
+  become: true
+
+
+
+
