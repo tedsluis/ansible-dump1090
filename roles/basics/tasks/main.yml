@@ -21,16 +21,74 @@
   - wget
   become: true
 
+# http://docs.ansible.com/ansible/file_module.html
+
+# Creates /home/pi/git directory
+- name: Creates /home/pi/git directory
+  file: path=/home/pi/git 
+  state: directory 
+  owner: pi 
+  group: pi 
+  mode: 0775
+  become: true
+
+# http://docs.ansible.com/ansible/stat_module.html
+
+# Check is /home/pi/connect.dump.sh exists
+- stat: path=/home/pi/connect.dump.sh
+  register: stateconnectdumpsh
+
+# Touch /home/pi/connect.dump.sh if not exists
+- name: Touch /home/pi/connect.dump.sh if not exists
+  file: path=/home/pi/connect.dump.sh
+  state: touch
+  owner: pi
+  group: pi
+  mode: 0775
+  become: true
+  when: stateconnectdumpsh.stat.exists is defined and stateconnectdumpsh.stat.exists
+
 # http://docs.ansible.com/ansible/lineinfile_module.html
 
+# Add aliases to .profile
 - name: Insert alias ll into .profile
   lineinfile:
     dest: '/home/pi/.profile'
     regexp: '^alias ll='
     state: present
     line: 'alias ll="ls -ls --color"'
-  become: true
+- name: Insert alias tmp into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias tmp='
+    state: present
+    line: 'alias tmp="cd /tmp"'
+- name: Insert alias www into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias www='
+    state: present
+    line: 'alias www="cd /var/www"'
+- name: Insert alias etc into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias etc='
+    state: present
+    line: 'alias etc="cd /etc"'
+- name: Insert alias git into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias git='
+    state: present
+    line: 'alias git="cd /home/pi/git"'
+- name: Insert alias log into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias log='
+    state: present
+    line: 'alias log="cd /var/log"'
 
+# Set vim syntax highlighting on
 - name: Set vim syntax no (globaly)
   lineinfile:
     dest: /etc/vim/vimrc
@@ -39,6 +97,7 @@
     line: 'syntax on'
   become: true
 
+# Add /home/pi/connect.dump.sh to /etc/rc.local
 - name: Add /home/pi/connect.dump.sh to /etc/rc.local
   lineinfile:
     dest: /etc/rc.local
@@ -48,6 +107,7 @@
     line: '/home/pi/connect.dump.sh &'
   become: true
 
+# Add hosts from Ansible inventory to /etc/hosts
 - name: Update /etc/hosts from inventory
   lineinfile: dest=/etc/hosts 
     regexp='.*{{item}}$' 
