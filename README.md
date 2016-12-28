@@ -3,7 +3,19 @@ Use [Ansible](https://www.ansible.com/) playbooks for dump1090 hosts. Ansible, m
   
 ## Table of contents  
   
-
+  * [ansible-dump1090](#ansible-dump1090)
+    * [Table of contents](#table-of-contents)
+    * [Why manage hosts using Ansible?](#why-manage-hosts-using-ansible)
+    * [Types of playbooks](#types-of-playbooks)
+    * [Install Ansible](#install-ansible)
+    * [Generate SSH key](#generate-ssh-key)
+    * [Clone this repo](#clone-this-repo)
+    * [Change the default ansible.cgf location](#change-the-default-ansiblecgf-location)
+    * [Add your dump1090 hosts to your Ansible 'hosts' file](#add-your-dump1090-hosts-to-your-ansible-hosts-file)
+    * [Test Ansible](#test-ansible)
+    * [Run a playbook](#run-a-playbook)
+    * [More info](#more-info)
+  
 ## Why manage hosts using Ansible?  
   
 I have several raspberry pi's and orange pi's that run dump1090, piaware, dump1090-tools (collectd), etc. I reinstall them freqently. It takes a lot of steps to install all the packages and edit all the configuration files.  
