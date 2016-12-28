@@ -1,5 +1,5 @@
 # ansible-dump1090
-Use [Ansible](https://www.ansible.com/) playbooks for dump1090 hosts. Ansible, make it so!  
+Use [Ansible](https://www.ansible.com/) playbooks to configure dump1090 hosts. Ansible, make it so!  
   
 ## Table of contents  
   
@@ -13,13 +13,14 @@ Use [Ansible](https://www.ansible.com/) playbooks for dump1090 hosts. Ansible, m
     * [Add your dump1090 hosts to your Ansible 'hosts' file](#add-your-dump1090-hosts-to-your-ansible-hosts-file)
     * [Test Ansible](#test-ansible)
     * [Run a playbook](#run-a-playbook)
+    * [Logging](#Logging)
     * [More info](#more-info)
   
 ## Why manage hosts using Ansible?  
   
-I have several raspberry pi's and orange pi's that run dump1090, piaware, dump1090-tools (collectd), etc. I reinstall them freqently. It takes a lot of steps to install all the packages and edit all the configuration files.  
+I have several raspberry pi's and orange pi's that run dump1090-mutability, piaware, dump1090-tools (collectd), etc. I reinstall them freqently. It takes a lot of steps to install all the packages and edit all the configuration files.  
   
-It is hard to install new dump1090 devices in the same way. It is easy to forget steps or do it differtly. None of my dump1090 devices were the same until I started using Ansible.  
+It is hard to install new dump1090 devices always in the exact same way. It is easy to forget steps or do it differtly. None of my dump1090 devices were the same until I started using Ansible.  
   
 With Ansible I can
 
@@ -29,7 +30,7 @@ With Ansible I can
 * Deploy updates rapidly over multiple hosts.
 * Guarantee that my devices are always in the correct same state after every reinstall.  
 
-Ansible just checks the state. If it is already in that right state, it does nothing. But if it isn't then Ansible will configure it in the right state!
+Ansible just checks the 'state'. If it is already in that right state, it does nothing. But if it isn't then Ansible will configure it in the right state!
   
 Ansible needs to be installed on only one 'management' host. This could be a raspberry pi or an other linux device. You can even run it on one of your dump1090 hosts! Ansible doesn't needs 'agents' or any additional software on the hosts you want to manage. It uses only SSH login with a SSH key!  
 
@@ -152,7 +153,7 @@ Before start any playbook: Change the default location for ansible.cfg on your A
 pi@raspberry-1:~ $ export ANSIBLE_CONFIG="$HOME/git/ansible-dump1090/ansible.cfg"
 ````
 Add this line to your '~/.profile', to be sure it is set every time you use Ansible.  
-    
+      
 ## Add your dump1090 hosts to your Ansible 'hosts' file
   
 Add your dump1090 hosts to the '$HOME/git/ansible-dump1090/hosts' file on your Ansible management host, for example:
@@ -250,6 +251,12 @@ PLAY RECAP *********************************************************************
 raspberry-2                  : ok=6    changed=0    unreachable=0    failed=0   
 ````
   
+## Logging
+  
+Logging is written to /var/log/ansible.log  
+  
+You can disable logging by putting a # infront of log_path=/var/log/ansible.log in the ansible.cfg.  
+
 ## More info
   
 * http://docs.ansible.com/ansible
