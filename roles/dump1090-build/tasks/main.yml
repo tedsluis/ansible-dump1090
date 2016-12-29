@@ -2,34 +2,32 @@
 # These tasks build dump1090.
 # ted.sluis@gmail.com
 
-# http://docs.ansible.com/ansible/playbooks_environment.html
-
-# set build environment variable
-- name: Set environment variable non interactive mode
-  environment: 
-  DEBIAN_FRONTEND: noninteractive
-
 # http://docs.ansible.com/ansible/list_of_files_modules.html 
 
 # Create build directory 
 - name: Create build dir
-  file: path={{ builddirectory }} state=directory
+  file: 
+    path: "{{ builddirectory }}"
+    state: directory
 
 # http://docs.ansible.com/ansible/git_module.html 
 
 # Clone repo to build directory
 - name: Clone {{ dump1090_repository }} repo
   git:
-    repo: {{ dump1090_repository }}
-    dest: {{ builddirectory }}
+    repo: "{{ dump1090_repository }}"
+    dest: "{{ builddirectory }}"
     clone: yes
     force: yes
     update: yes
 
 # http://docs.ansible.com/ansible/shell_module.html
+# http://docs.ansible.com/ansible/playbooks_environment.html
 
 # build dump1090 from source
 - name: build dump1090 from source
   shell: dpkg-buildpackage -b
   args:
-    chdir: {{ builddirectory }}/dump1090 
+    chdir: "{{ builddirectory }}/dump1090"
+  environment:
+    DEBIAN_FRONTEND: noninteractive
