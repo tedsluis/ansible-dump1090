@@ -142,6 +142,11 @@
     job: "sudo /sbin/reboot"
   become: true
 
+# https://docs.ansible.com/ansible/timezone_module.html
 
+# Set time zone
+- name: set timezone to Asia/Tokyo
+  timezone:
+    name: Europe/Amsterdam
 
 
