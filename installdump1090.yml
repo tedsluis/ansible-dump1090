@@ -1,4 +1,4 @@
-- name: prepare for build dum1090
+- name: prepare for build dump1090
   hosts: ted1090-2
   remote_user: pi
   roles:
