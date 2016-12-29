@@ -2,22 +2,22 @@
   hosts: ted1090-2
   remote_user: pi
   roles:
-  - prepare-dump1090
+  - dump1090-prepare
 
 - name: clone from git & build dump1090
   hosts: ted1090-2
   remote_user: pi
   roles:
-  - build-dump1090
+  - dump1090-build
 
 - name: install dump1090
   hosts: ted1090-2
   remote_user: pi
   roles:
-  - install-dump1090
+  - dump1090-install
 
 - name: configure dump1090
   hosts: ted1090-2
   remote_user: pi
   roles:
-  - configure-dump1090
+  - dump1090-configure
