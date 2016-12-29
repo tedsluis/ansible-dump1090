@@ -1,6 +1,13 @@
 ---
 # Handler to handle common notifications. Handlers are called by other plays.
 
+# http://docs.ansible.com/ansible/service_module.html
+
+# Restart lighhtp server
 - name: restart lighttpd
-  service: name=lighttpd state=restarted
+  service: 
+    name: lighttpd 
+    enabled: yes
+    state: restarted
+  become: true
 

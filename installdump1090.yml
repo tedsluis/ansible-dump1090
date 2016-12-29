@@ -17,7 +17,7 @@
   - install-dump1090
 
 - name: configure dump1090
-  hosts ted1090-2
+  hosts: ted1090-2
   remote_user: pi
   roles:
   - configure-dump1090

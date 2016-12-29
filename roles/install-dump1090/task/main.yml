@@ -1,9 +1,18 @@
 ---
 # These tasks install dump1090 and restart the web server.
+# ted.sluis@gmail.com
 
+# http://docs.ansible.com/ansible/apt_module.html
+
+# Install new dump1090 from build directory
 - name: Install dump1090
-  apt: deb=/tmp/build/dump1090-mutability_1.15~dev_armhf.deb
+  apt: deb={{ builddirectory }}/dump1090-mutability_1.15~dev_armhf.deb
+  become: true
 
+# http://docs.ansible.com/ansible/command_module.html
+
+# Enable lighttpd dump1090
 - name: Enable lighttpd dump1090
   command: lighttpd-enable-mod dump1090
   notify: restart lighttpd
+  become: true
