@@ -10,6 +10,8 @@
 
 # Ex 1: Ungrouped hosts, specify before any group headers.
 
+ted1090-2
+
 # Raspberry Pi - Raspbian Jessie 4.4.38-v7+
 [raspbian]
 ted1090-1
