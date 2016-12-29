@@ -1,5 +1,8 @@
+# install basic packages and configure basic settings like:
+# ted.sluis@gmail.com
+
 - name: install basic packages and configure basic settings.
-  hosts: ted1090-2
+  hosts: dump1090
   remote_user: pi
   roles:
   - basics
