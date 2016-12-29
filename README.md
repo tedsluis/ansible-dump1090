@@ -253,9 +253,9 @@ raspberry-2                  : ok=6    changed=0    unreachable=0    failed=0
   
 ## Logging
   
-Logging is written to /var/log/ansible.log  
+Logging is written to '/tmp/ansible.log'.  
   
-You can disable logging by putting a # infront of log_path=/var/log/ansible.log in the ansible.cfg.  
+You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg.  
 
 ## More info
   
