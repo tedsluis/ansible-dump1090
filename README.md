@@ -40,7 +40,7 @@ Ansible is open source software (maintained by Red Hat) and is used on a wide va
   
 Playbook                                                                                            | Description                                            | Tasks and settings                    |
 ----------------------------------------------------------------------------------------------------|--------------------------------------------------------|-----------------------------|
-[installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and configuration of hosts. |[packages](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/packages.yml)<br>[git settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/git.yml)<br>[run script](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/connectdumpsh.yml)<br>[aliasses](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/aliasses.yml)<br>[vim settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/vimsettings.yml)<br>[/etc/hosts file](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/etchosts.yml)<br>[crontab jobs](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/cronjobs.yml)<br>[time zone](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/timezone.yml)<br>[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br> [group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)|
+[installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and configuration of hosts. |[packages](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/packages.yml)<br>[git settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/git.yml)<br>[run script](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/connectdumpsh.yml)<br>[aliasses](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/aliasses.yml)<br>[vim settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/vimsettings.yml)<br>[/etc/hosts file](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/etchosts.yml)<br>[crontab jobs](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/cronjobs.yml)<br>[time zone](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/timezone.yml)<br>[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br>[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[reboot-order-first](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-first)<br>[reboot-order-second](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-second)<br>[reboot-order-third](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-third)|
 [installdump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml)| Does the building and installation of dump1090.        | [prepare](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-prepare/tasks/main.yml)<br>[build](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-build/tasks/main.yml)<br>[install task](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/tasks/main.yml)<br>[install handler](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/handlers/main.yml)<br>[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br> [group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)        |
   
 ## Install Ansible  
@@ -197,6 +197,21 @@ raspberry-4
 raspberry-5
 orangepi-6
 orangepi-7
+
+# The groups below are meant to define the reboot order of the hosts.
+# check 'group_vars/reboot-order-....' for more info.
+[reboot-order-first]
+ted1090-2
+ted1090-3
+ted1090-4
+ted1090-7
+
+[reboot-order-second]
+ted1090-1
+ted1090-6
+
+[reboot-order-third]
+ted1090-5
 ````
   
 ## Test Ansible
@@ -290,6 +305,69 @@ ok: [orangepi-6]
 ok: [orangepi-7]
 ok: [raspberry-2]
 ok: [raspberry-1]
+
+TASK [basics : Check if /home/pi/.gitconfig exists] ****************************
+ok: [ted1090-5]
+ok: [ted1090-3]
+ok: [ted1090-4]
+ok: [ted1090-6]
+ok: [ted1090-7]
+ok: [ted1090-2]
+ok: [ted1090-1]
+
+TASK [basics : Touch /home/pi/.gitconfig if not exists] ************************
+skipping: [ted1090-5]
+changed: [ted1090-6]
+changed: [ted1090-3]
+changed: [ted1090-4]
+changed: [ted1090-7]
+changed: [ted1090-2]
+changed: [ted1090-1]
+
+TASK [basics : Add [user] section to /home/pi/.gitconfig] **********************
+ok: [ted1090-5]
+changed: [ted1090-3]
+changed: [ted1090-4]
+changed: [ted1090-6]
+changed: [ted1090-7]
+changed: [ted1090-2]
+changed: [ted1090-1]
+
+TASK [basics : Add 'name = tedsluis'  to .gitconfig] ***************************
+changed: [ted1090-3]
+changed: [ted1090-4]
+changed: [ted1090-6]
+changed: [ted1090-7]
+changed: [ted1090-2]
+ok: [ted1090-5]
+changed: [ted1090-1]
+
+TASK [basics : Add 'email = ted.sluis@gmail.com'  to /home/pi/.gitconfig] ******
+changed: [ted1090-3]
+ok: [ted1090-5]
+changed: [ted1090-4]
+changed: [ted1090-6]
+changed: [ted1090-7]
+changed: [ted1090-2]
+changed: [ted1090-1]
+
+TASK [basics : Add section [push] to /home/pi/.gitconfig] **********************
+ok: [ted1090-5]
+changed: [ted1090-3]
+changed: [ted1090-4]
+changed: [ted1090-7]
+changed: [ted1090-6]
+changed: [ted1090-2]
+changed: [ted1090-1]
+
+TASK [basics : Add 'default = matching'  to /home/pi/.gitconfig] ***************
+ok: [ted1090-5]
+changed: [ted1090-3]
+changed: [ted1090-4]
+changed: [ted1090-6]
+changed: [ted1090-7]
+changed: [ted1090-2]
+changed: [ted1090-1]
 
 TASK [basics : Check if /home/pi/connect.dump.sh exists] ***********************
 ok: [raspberry-3]
@@ -460,13 +538,13 @@ changed: [raspberry-2]
 ok: [raspberry-1]
 
 PLAY RECAP *********************************************************************
-raspberry-1                  : ok=16   changed=0    unreachable=0    failed=0   
-raspberry-2                  : ok=16   changed=12   unreachable=0    failed=0   
-raspberry-3                  : ok=16   changed=0    unreachable=0    failed=0   
-raspberry-4                  : ok=16   changed=0    unreachable=0    failed=0   
-raspberry-5                  : ok=16   changed=0    unreachable=0    failed=0   
-orangepi-6                   : ok=16   changed=1    unreachable=0    failed=0   
-orangepi-7                   : ok=16   changed=1    unreachable=0    failed=0 
+raspberry-1                  : ok=24   changed=6    unreachable=0    failed=0   
+raspberry-2                  : ok=24   changed=18   unreachable=0    failed=0   
+raspberry-3                  : ok=24   changed=6    unreachable=0    failed=0   
+raspberry-4                  : ok=24   changed=6    unreachable=0    failed=0   
+raspberry-5                  : ok=24   changed=0    unreachable=0    failed=0   
+orangepi-6                   : ok=24   changed=7    unreachable=0    failed=0   
+orangepi-7                   : ok=24   changed=7    unreachable=0    failed=0 
 ````
   
 ## Logging

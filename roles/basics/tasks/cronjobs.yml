@@ -16,7 +16,7 @@
 - name: schedule reboot cronjob every friday 3am.
   cron:
     name: "schedule reboot cronjob every friday 3am."
-    minute: "0"
+    minute: "{{ rebootdelay }}"
     hour: "3"
     weekday: "5"
     job: "sudo /sbin/reboot"

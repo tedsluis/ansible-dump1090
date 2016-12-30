@@ -1,0 +1,5 @@
+# reboot order
+# ted.sluis@gmail.com
+
+# No reboot delay
+rebootdelay: "0"

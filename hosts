@@ -10,7 +10,6 @@
 
 # Ex 1: Ungrouped hosts, specify before any group headers.
 
-ted1090-2
 
 # Raspberry Pi - Raspbian Jessie 4.4.38-v7+
 [raspbian]
@@ -42,3 +41,20 @@ ted1090-4
 ted1090-5
 ted1090-6
 ted1090-7
+
+# These groups are meant to define the reboot order of the hosts.
+# check 'group_vars/reboot-order-....' for more info.
+[reboot-order-first]
+ted1090-2
+ted1090-3
+ted1090-4
+ted1090-7
+
+[reboot-order-second]
+ted1090-1
+ted1090-6
+
+[reboot-order-third]
+ted1090-5
+
+
