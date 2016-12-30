@@ -8,9 +8,11 @@ builddirectory: /tmp/build
 gitdirectory: /home/pi/git
 gitconfig: /home/pi/.gitconfig
 
-# default user info
+# user info
 myusername: tedsluis
 emailaddress: ted.sluis@gmail.com
+mailhub: smtp.gmail.com:587
+emailpassword: <password>
 
 # default timezone
 mytimezone: Europe/Amsterdam

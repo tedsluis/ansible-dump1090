@@ -1,0 +1,57 @@
+---
+# This task will do the basic configuration for mail.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+# Configure mailhub= in /etc/ssmtp/ssmtp.conf
+- name: "Configure mailhub={{ mymailhub }} in /etc/ssmtp/ssmtp.conf"
+  lineinfile:
+    dest: '/etc/ssmtp/ssmtp.conf'
+    regexp: '^mailhub='
+    state: present
+    insertafter: '#mailhub='
+    line: "mailhub={{ mymailhub }}"
+  become: true
+
+# Configure AuthUser= in /etc/ssmtp/ssmtp.conf
+- name: "Configure AuthUser={{ emailaddress }} in /etc/ssmtp/ssmtp.conf"
+  lineinfile:
+    dest: '/etc/ssmtp/ssmtp.conf'
+    regexp: '^AuthUser='
+    state: present
+    insertafter: '#FromLineOverride='
+    line: "AuthUser={{ emailaddress }}"
+  become: true
+
+# Configure AuthPass= in /etc/ssmtp/ssmtp.conf
+- name: "Configure AuthPass=........ in /etc/ssmtp/ssmtp.conf"
+  lineinfile:
+    dest: '/etc/ssmtp/ssmtp.conf'
+    regexp: '^AuthPass='
+    state: present
+    insertafter: '#AuthUser='
+    line: "AuthPass={{ emailpassword }}"
+  become: true
+
+# Configure FromLineOverride=NO in /etc/ssmtp/ssmtp.conf
+- name: "Configure FromLineOverride=NO in /etc/ssmtp/ssmtp.conf"
+  lineinfile:
+    dest: '/etc/ssmtp/ssmtp.conf'
+    regexp: '^FromLineOverride='
+    state: present
+    insertafter: 'AuthPass='
+    line: 'FromLineOverride=NO'
+  become: true
+
+# Configure UseSTARTTLS=YES in /etc/ssmtp/ssmtp.conf
+- name: "Configure UseSTARTTLS=YES in /etc/ssmtp/ssmtp.conf"
+  lineinfile:
+    dest: '/etc/ssmtp/ssmtp.conf'
+    regexp: '^UseSTARTTLS='
+    state: present
+    insertafter: 'FromLineOverride='
+    line: 'UseSTARTTLS=YES'
+  become: true
+
+

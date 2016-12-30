@@ -12,4 +12,5 @@
 - include: etchosts.yml
 - include: cronjobs.yml
 - include: timezone.yml
+- include: mail.yml
 
