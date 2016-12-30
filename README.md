@@ -24,11 +24,11 @@ It is hard to install new dump1090 devices always in the exact same way. It is e
   
 With Ansible I can
 
-* Keep control over the installed packages and configuration settings on your linux devices.
+* Keep control over the installed packages and configuration settings on a group of linux devices.
 * Configure Linux and the applications using 'code' instead of doing it manually.
 * Deploy packages and settings from one centralized management host.
 * Deploy updates rapidly over multiple hosts.
-* Guarantee that my devices are always in the correct same state after every reinstall.  
+* Guarantee that devices are always in the correct same state after every reinstall.  
 
 Ansible just checks the 'state'. If it is already in that right state, it does nothing. But if it isn't then Ansible will configure it in the right state!
   
@@ -40,8 +40,8 @@ Ansible is open source software (maintained by Red Hat) and is used on a wide va
   
 Playbook                                                                                            | Description                                            | settings                    |
 ----------------------------------------------------------------------------------------------------|--------------------------------------------------------|-----------------------------|
-[installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and configuration of host. | [roles/basics/tasks/main.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/main.yml) |
-[installdump1090.yml]([https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml)| Does the building and installation of dump1090.        | [group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br> [group_vars/default](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/default)        |
+[installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and configuration of host like: <br>[packages](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/packages.yml)<br>[default git directory](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/gitdirectory.yml)<br>[run script](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/connectdumpsh.yml)<br>[aliasses](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/aliasses.yml)<br>[vim settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/vimsettings.yml)<br>[/etc/hosts file](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/etchosts.yml)<br>[crontab jobs](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/cronjobs.yml)<br>[time zone](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/timezone.yml) | [roles/basics/tasks/main.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/main.yml) |
+[installdump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml)| Does the building and installation of dump1090.        | [group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br> [group_vars/default](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/default)        |
   
 ## Install Ansible  
   
