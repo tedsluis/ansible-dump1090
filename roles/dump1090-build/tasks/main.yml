@@ -7,7 +7,7 @@
 # Create build directory 
 - name: Create build dir
   file: 
-    path: "{{ builddirectory }}"
+    path: "{{ builddirectory }}/dump1090"
     state: directory
 
 # http://docs.ansible.com/ansible/git_module.html 
@@ -16,7 +16,7 @@
 - name: Clone {{ dump1090_repository }} repo
   git:
     repo: "{{ dump1090_repository }}"
-    dest: "{{ builddirectory }}"
+    dest: "{{ builddirectory }}/dump1090"
     clone: yes
     force: yes
     update: yes
