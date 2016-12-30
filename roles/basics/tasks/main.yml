@@ -5,7 +5,7 @@
 # http://docs.ansible.com/ansible/playbooks_roles.html
 
 - include: packages.yml
-- include: gitdirectory.yml
+- include: git.yml
 - include: connectdumpsh.yml
 - include: aliasses.yml
 - include: vimsettings.yml
