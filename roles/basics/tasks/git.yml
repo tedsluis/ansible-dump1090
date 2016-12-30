@@ -4,14 +4,82 @@
 
 # http://docs.ansible.com/ansible/file_module.html
 
-# Creates /home/pi/git directory
-- name: Creates /home/pi/git directory
+# Creates {{ gitdirectory }} directory
+- name: Creates {{ gitdirectory }} directory
   file: 
-    path: '/home/pi/git' 
+    path: "{{ gitdirectory }}" 
     state: directory 
     owner: pi 
     group: pi 
     mode: 0775
   become: true
+
+# http://docs.ansible.com/ansible/stat_module.html
+
+# Check if .gitconfig exists
+- name: Check if {{ gitconfig }} exists
+  stat: 
+    path: "{{ gitconfig }}"
+  register: stategitconfig
+
+# http://docs.ansible.com/ansible/file_module.html
+
+# Touch .gitconfig if not exists
+- name: Touch {{ gitconfig }} if not exists
+  file: 
+    path: "{{ gitconfig }}"
+    state: touch
+    owner: pi
+    group: pi
+    mode: 0775
+  when: stategitconfig.stat.exists is undefined 
+  become: true
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+# Add [user] section to .gitconfig
+- name: Add [user] section to {{ gitconfig }}
+  lineinfile:
+    dest: "{{ gitconfig }}"
+    regexp: '^\[user\]'
+    state: present
+    insertbefore: 'name'
+    line: '[user]'
+
+# Add 'name = username' to .gitconfig
+- name: Add 'name = {{ myusername }}'  to .gitconfig
+  lineinfile:
+    dest: "{{ gitconfig }}"
+    regexp: 'name'
+    state: present
+    insertafter: '^\[user\]'
+    line: "name = {{ myusername }}"
+
+# Add 'email = emailaddress' to .gitconfig
+- name: Add 'email = {{ emailaddress }}'  to {{ gitconfig }}
+  lineinfile:
+    dest: "{{ gitconfig }}"
+    regexp: 'email'
+    state: present
+    insertafter: 'name'
+    line: "email = {{ emailaddress }}"
+
+# Add section [push] to .gitconfig
+- name: Add section [push] to {{ gitconfig }}
+  lineinfile:
+    dest: "{{ gitconfig }}"
+    regexp: '\[push\]'
+    state: present
+    insertafter: 'email'
+    line: '[push]'
+
+# Add 'default = matching' to .gitconfig
+- name: Add 'default = matching'  to {{ gitconfig }}
+  lineinfile:
+    dest: "{{ gitconfig }}"
+    regexp: 'default'
+    state: present
+    insertafter: '^\[push\]'
+    line: 'default = matching'
 
 

@@ -2,3 +2,10 @@
 # Variables listed here are applicable to all host groups
 
 builddirectory: /tmp/build
+
+gitdirectory: /home/pi/git
+gitconfig: /home/pi/.gitconfig
+
+myusername: tedsluis
+emailaddress: ted.sluis@gmail.com
+
