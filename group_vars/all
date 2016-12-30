@@ -11,7 +11,7 @@ gitconfig: /home/pi/.gitconfig
 # user info
 myusername: tedsluis
 emailaddress: ted.sluis@gmail.com
-mailhub: smtp.gmail.com:587
+mymailhub: smtp.gmail.com:587
 emailpassword: <password>
 
 # default timezone
