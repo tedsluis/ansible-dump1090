@@ -168,14 +168,14 @@ raspberry-5
 
 # Orange Pi 2 plus - Armbian 3.4.112-sun8i
 [armbian]
-raspberry-6
-raspberry-7
+orangepi-6
+orangepi-7
 
 [dump1090]
 raspberry-1
 raspberry-4
 raspberry-5
-raspberry-7
+orangepi-7
 
 [all]
 raspberry-1
@@ -183,8 +183,8 @@ raspberry-2
 raspberry-3
 raspberry-4
 raspberry-5
-raspberry-6
-raspberry-7
+orangepi-6
+orangepi-7
 ````
   
 ## Test Ansible
@@ -201,10 +201,10 @@ hello
 raspberry-4 | SUCCESS | rc=0 >>
 hello
 
-raspberry-6 | SUCCESS | rc=0 >>
+orangepi-6 | SUCCESS | rc=0 >>
 hello
 
-raspberry-7 | SUCCESS | rc=0 >>
+orangepi-7 | SUCCESS | rc=0 >>
 hello
 
 raspberry-2 | SUCCESS | rc=0 >>
@@ -213,49 +213,252 @@ hello
 raspberry-1 | SUCCESS | rc=0 >>
 hello
 ````
-Note: In this example 'all' is a group name. Therefor a section [all] should be present within your '$HOME/git/ansible-dump1090/hosts' file containing your dump1090 hostnames! 
+Note: In this example 'all' is a group name. Therefor a section [all] should be present within your '$HOME/git/ansible-dump1090/hosts' file containing your dump1090 hostnames!   
+  
+Now you can do things like updating a ip address of host raspberry-2 in /etc/hosts on all your dump1090 hosts:  
+````
+pi@raspberry-1:~ $ ansible all -a "sudo sed -i 's/192\.168\.11\.7 raspberry-2/192\.168\.11\.34 raspberry-2/' /etc/hosts" 
+raspberry-3 | SUCCESS | rc=0 >>
+
+
+raspberry-4 | SUCCESS | rc=0 >>
+
+
+raspberry-5 | SUCCESS | rc=0 >>
+
+
+orangepi-6 | SUCCESS | rc=0 >>
+
+
+orangepi-7 | SUCCESS | rc=0 >>
+
+
+raspberry-2 | SUCCESS | rc=0 >>
+
+
+raspberry-1 | SUCCESS | rc=0 >>
+````
   
 ## Run a playbook  
+
+Using Ansible you can execute commands on multiple hosts. Using Ansible playbooks you can execute scripts (in yml format) that take care deployment and configuration on multiple hosts.
   
 In this example I run a playbook only on one host (as configured in installbasics.yml):
 ````
-pi@raspberry-1:~ $ ansible-playbook  installbasics.yml 
+$ ansible-playbook installbasics.yml
 
 PLAY [install basic packages and configure basic settings.] ********************
 
 TASK [setup] *******************************************************************
+ok: [raspberry-5]
+ok: [raspberry-3]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
 ok: [raspberry-2]
+ok: [raspberry-1]
 
 TASK [basics : Install basic packages] *****************************************
-ok: [raspberry-2] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'vim', u'wget'])
+ok: [raspberry-5] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+ok: [raspberry-3] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+ok: [raspberry-4] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+ok: [orangepi-6]  => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+ok: [orangepi-7]  => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+ok: [raspberry-2] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+ok: [raspberry-1] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
 
-TASK [basics : Insert alias ll into .profile] **********************************
+TASK [basics : Creates /home/pi/git directory] *********************************
+ok: [raspberry-5]
+ok: [raspberry-3]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
 ok: [raspberry-2]
+ok: [raspberry-1]
 
-TASK [basics : Set vim syntax no (globaly)] ************************************
+TASK [basics : Check if /home/pi/connect.dump.sh exists] ***********************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
 ok: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Touch /home/pi/connect.dump.sh if not exists] *******************
+skipping: [raspberry-3]
+skipping: [raspberry-1]
+skipping: [raspberry-2]
+skipping: [raspberry-4]
+skipping: [raspberry-5]
+skipping: [orangepi-6]
+skipping: [orangepi-7]
 
 TASK [basics : Add /home/pi/connect.dump.sh to /etc/rc.local] ******************
-ok: [raspberry-2]
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-7]
+ok: [orangepi-6]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Insert alias ll into .profile] **********************************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-7]
+ok: [orangepi-6]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Insert alias tmp into .profile] *********************************
+ok: [raspberry-3]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
+changed: [raspberry-2]
+ok: [raspberry-1]
+ok: [raspberry-5]
+
+TASK [basics : Insert alias www into .profile] *********************************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Insert alias etc into .profile] *********************************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-7]
+ok: [orangepi-6]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Insert alias git into .profile] *********************************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-7]
+ok: [orangepi-6]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Insert alias log into .profile] *********************************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-7]
+ok: [orangepi-6]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : Set vim syntax no (globaly)] ************************************
+ok: [raspberry-3]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
+changed: [raspberry-2]
+ok: [raspberry-1]
+ok: [raspberry-5]
 
 TASK [basics : Update /etc/hosts from inventory] *******************************
-skipping: [raspberry-2] => (item=raspberry-1) 
+ok: [raspberry-5] => (item=orangepi-7)
+ok: [raspberry-3] => (item=orangepi-7)
+ok: [raspberry-4] => (item=raspberry-5)
+ok: [raspberry-1] => (item=raspberry-2)
+ok: [raspberry-5] => (item=orangepi-6)
+ok: [raspberry-3] => (item=orangepi-6)
+ok: [raspberry-4] => (item=raspberry-4)
+ok: [raspberry-5] => (item=raspberry-5)
+ok: [raspberry-3] => (item=raspberry-5)
 ok: [raspberry-2] => (item=raspberry-2)
-skipping: [raspberry-2] => (item=raspberry-3) 
-skipping: [raspberry-2] => (item=raspberry-4) 
-skipping: [raspberry-2] => (item=raspberry-5) 
-skipping: [raspberry-2] => (item=raspberry-6) 
-skipping: [raspberry-2] => (item=raspberry-7) 
+ok: [raspberry-4] => (item=raspberry-3)
+ok: [raspberry-5] => (item=raspberry-4)
+ok: [raspberry-3] => (item=raspberry-4)
+ok: [raspberry-3] => (item=raspberry-3)
+ok: [raspberry-5] => (item=raspberry-3)
+ok: [raspberry-4] => (item=raspberry-1)
+ok: [raspberry-3] => (item=raspberry-1)
+ok: [raspberry-5] => (item=raspberry-1)
+ok: [raspberry-4] => (item=raspberry-2)
+ok: [raspberry-3] => (item=raspberry-2)
+ok: [raspberry-5] => (item=raspberry-2)
+ok: [orangepi-6]  => (item=raspberry-2)
+ok: [orangepi-7]  => (item=raspberry-2)
+ok: [raspberry-4] => (item=orangepi-6)
+ok: [raspberry-2] => (item=raspberry-1)
+ok: [orangepi-6]  => (item=raspberry-1)
+ok: [orangepi-7]  => (item=raspberry-1)
+ok: [orangepi-6]  => (item=raspberry-3)
+ok: [orangepi-7]  => (item=raspberry-3)
+ok: [raspberry-4] => (item=orangepi-7)
+ok: [orangepi-6]  => (item=raspberry-4)
+ok: [orangepi-7]  => (item=raspberry-4)
+ok: [orangepi-6]  => (item=raspberry-5)
+ok: [orangepi-7]  => (item=raspberry-5)
+ok: [orangepi-6]  => (item=orangepi-6)
+ok: [orangepi-7]  => (item=orangepi-6)
+ok: [orangepi-6]  => (item=orangepi-7)
+ok: [orangepi-7]  => (item=orangepi-7)
+ok: [raspberry-2] => (item=raspberry-3)
+ok: [raspberry-1] => (item=raspberry-1)
+ok: [raspberry-2] => (item=raspberry-4)
+ok: [raspberry-1] => (item=raspberry-3)
+ok: [raspberry-2] => (item=raspberry-5)
+ok: [raspberry-2] => (item=orangepi-6)
+ok: [raspberry-1] => (item=raspberry-4)
+ok: [raspberry-2] => (item=orangepi-7)
+ok: [raspberry-1] => (item=raspberry-5)
+ok: [raspberry-1] => (item=orangepi-6)
+ok: [raspberry-1] => (item=orangepi-7)
+
+TASK [basics : schedule apt-get update & upgrade every cronjob friday 0am.] ****
+ok: [raspberry-5]
+ok: [raspberry-3]
+ok: [orangepi-6]
+ok: [orangepi-7]
+ok: [raspberry-4]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : schedule reboot cronjob every friday 3am.] **********************
+ok: [raspberry-3]
+ok: [raspberry-5]
+ok: [raspberry-4]
+ok: [orangepi-6]
+ok: [orangepi-7]
+changed: [raspberry-2]
+ok: [raspberry-1]
+
+TASK [basics : set timezone to Europe/Amsterdam] *******************************
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+changed: [raspberry-2]
+ok: [raspberry-1]
 
 PLAY RECAP *********************************************************************
-raspberry-2                  : ok=6    changed=0    unreachable=0    failed=0   
+raspberry-1                  : ok=16   changed=0    unreachable=0    failed=0   
+raspberry-2                  : ok=16   changed=12   unreachable=0    failed=0   
+raspberry-3                  : ok=16   changed=0    unreachable=0    failed=0   
+raspberry-4                  : ok=16   changed=0    unreachable=0    failed=0   
+raspberry-5                  : ok=16   changed=0    unreachable=0    failed=0   
+orangepi-6                   : ok=16   changed=1    unreachable=0    failed=0   
+orangepi-7                   : ok=16   changed=1    unreachable=0    failed=0 
 ````
   
 ## Logging
   
 Logging is written to '/tmp/ansible.log'.  
   
-You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg.  
+You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
 
 ## More info
   
