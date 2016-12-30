@@ -1,0 +1,23 @@
+---
+# These task will install basic packages for a dump1090 host.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/apt_module.html
+
+- name: Install basic packages
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+  - apt-utils 
+  - cron 
+  - curl
+  - debhelper 
+  - git
+  - netcat 
+  - net-tools 
+  - nmap
+  - python2.7 
+  - rsync
+  - vim
+  - wget
+  become: true
+

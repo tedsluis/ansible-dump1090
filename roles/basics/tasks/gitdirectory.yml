@@ -1,0 +1,17 @@
+---
+# These task will do the basic configuration for a dump1090 host.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/file_module.html
+
+# Creates /home/pi/git directory
+- name: Creates /home/pi/git directory
+  file: 
+    path: '/home/pi/git' 
+    state: directory 
+    owner: pi 
+    group: pi 
+    mode: 0775
+  become: true
+
+

@@ -1,0 +1,20 @@
+---
+# These task will do the basic configuration for a dump1090 host.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+# Add hosts from Ansible inventory to /etc/hosts
+- name: Update /etc/hosts from inventory
+  lineinfile: 
+    dest: /etc/hosts 
+    regexp: '.*{{item}}$' 
+    line: '{{hostvars[item].ansible_default_ipv4.address}} {{item}}' 
+    state: present
+  when: hostvars[item].ansible_default_ipv4.address is defined
+  with_items: '{{groups.all}}'
+  tags:
+    - hosts
+  become: true
+
+

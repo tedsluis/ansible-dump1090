@@ -1,0 +1,39 @@
+---
+# These task will do the basic configuration for a dump1090 host.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/stat_module.html
+
+# Check if /home/pi/connect.dump.sh exists
+- name: Check if /home/pi/connect.dump.sh exists
+  stat: 
+    path: '/home/pi/connect.dump.sh'
+  register: stateconnectdumpsh
+
+# http://docs.ansible.com/ansible/file_module.html
+
+# Touch /home/pi/connect.dump.sh if not exists
+- name: Touch /home/pi/connect.dump.sh if not exists
+  file: 
+    path: '/home/pi/connect.dump.sh'
+    state: touch
+    owner: pi
+    group: pi
+    mode: 0775
+  when: stateconnectdumpsh.stat.exists is undefined 
+  become: true
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+# Add /home/pi/connect.dump.sh to /etc/rc.local
+- name: Add /home/pi/connect.dump.sh to /etc/rc.local
+  lineinfile:
+    dest: /etc/rc.local
+    regexp: '^/home/pi/connect.dump.sh'
+    state: present
+    insertbefore: '^exit 0'
+    line: '/home/pi/connect.dump.sh &'
+  become: true
+
+
+

@@ -1,0 +1,46 @@
+---
+# These task will do the basic configuration for a dump1090 host.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+# Add aliases to .profile
+- name: Insert alias ll into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias ll='
+    state: present
+    line: 'alias ll="ls -ls --color"'
+- name: Insert alias tmp into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias tmp='
+    state: present
+    line: 'alias tmp="cd /tmp"'
+- name: Insert alias www into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias www='
+    state: present
+    line: 'alias www="cd /var/www"'
+- name: Insert alias etc into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias etc='
+    state: present
+    line: 'alias etc="cd /etc"'
+- name: Insert alias git into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias git='
+    state: present
+    line: 'alias git="cd /home/pi/git"'
+- name: Insert alias log into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias log='
+    state: present
+    line: 'alias log="cd /var/log"'
+
+
+
