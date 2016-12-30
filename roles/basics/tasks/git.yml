@@ -32,7 +32,7 @@
     owner: pi
     group: pi
     mode: 0775
-  when: stategitconfig.stat.exists is undefined 
+  when: stategitconfig.stat.exists is undefined or stategitconfig.stat.exists == False 
   become: true
 
 # http://docs.ansible.com/ansible/lineinfile_module.html
@@ -52,7 +52,7 @@
     dest: "{{ gitconfig }}"
     regexp: 'name'
     state: present
-    insertafter: '^\[user\]'
+    insertafter: 'user'
     line: "name = {{ myusername }}"
 
 # Add 'email = emailaddress' to .gitconfig
@@ -79,7 +79,7 @@
     dest: "{{ gitconfig }}"
     regexp: 'default'
     state: present
-    insertafter: '^\[push\]'
+    insertafter: 'push'
     line: 'default = matching'
 
 
