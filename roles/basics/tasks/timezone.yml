@@ -5,8 +5,8 @@
 # https://docs.ansible.com/ansible/timezone_module.html
 
 # Set time zone
-- name: set timezone to {{ mytimezone }}
+- name: "set timezone to {{ mytimezone }}"
   timezone:
-    name: {{ mytimezone }}
+    name: "{{ mytimezone }}"
   become: true
 
