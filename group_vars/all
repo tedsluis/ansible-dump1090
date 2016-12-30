@@ -1,12 +1,16 @@
 ---
 # Variables listed here are applicable to all host groups
 
+# Defailt build directory for dump1090
 builddirectory: /tmp/build
 
+# default git 
 gitdirectory: /home/pi/git
 gitconfig: /home/pi/.gitconfig
 
+# default user info
 myusername: tedsluis
 emailaddress: ted.sluis@gmail.com
 
+# default timezone
 mytimezone: Europe/Amsterdam
