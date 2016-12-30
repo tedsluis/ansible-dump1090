@@ -20,7 +20,7 @@
     owner: pi
     group: pi
     mode: 0775
-  when: stateconnectdumpsh.stat.exists is undefined 
+  when: stateconnectdumpsh.stat.exists is undefined or stateconnectdumpsh.stat.exists == False 
   become: true
 
 # http://docs.ansible.com/ansible/lineinfile_module.html
