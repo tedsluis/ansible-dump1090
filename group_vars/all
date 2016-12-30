@@ -9,3 +9,4 @@ gitconfig: /home/pi/.gitconfig
 myusername: tedsluis
 emailaddress: ted.sluis@gmail.com
 
+mytimezone: Europe/Amsterdam

@@ -5,8 +5,8 @@
 # https://docs.ansible.com/ansible/timezone_module.html
 
 # Set time zone
-- name: set timezone to Europe/Amsterdam
+- name: set timezone to {{ mytimezone }}
   timezone:
-    name: Europe/Amsterdam
+    name: {{ mytimezone }}
   become: true
 
