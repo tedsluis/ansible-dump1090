@@ -14,5 +14,6 @@
 # Enable lighttpd dump1090
 - name: Enable lighttpd dump1090
   command: lighttpd-enable-mod dump1090
+  ignore_errors: yes
   notify: restart lighttpd
   become: true
