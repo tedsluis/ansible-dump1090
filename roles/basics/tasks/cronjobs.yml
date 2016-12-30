@@ -5,14 +5,16 @@
 # http://docs.ansible.com/ansible/cron_module.html
 
 # cron jobs: weekly update & reboot
-- cron:
+- name: schedule apt-get update & upgrade every cronjob friday 0am.
+  cron: 
     name: "schedule apt-get update & upgrade every cronjob friday 0am."
     minute: "0"
     hour: "0"
     weekday: "5"
     job: "sudo apt-get update && sudo apt-get upgrade -y"
   become: true
-- cron:
+- name: schedule reboot cronjob every friday 3am.
+  cron:
     name: "schedule reboot cronjob every friday 3am."
     minute: "0"
     hour: "3"
