@@ -148,15 +148,27 @@ pi@raspberry-1:~/git/ansible-dump1090 $ pwd
   
 ## Change the default ansible.cgf location  
   
-Before start any playbook: Change the default location for ansible.cfg on your Ansible management host using:
+The [$HOME/git/ansible-dump1090/ansible.cfg](https://github.com/tedsluis/ansible-dump1090/blob/master/ansible.cfg) file contains your personal Ansible settings. In this case the following settings are different from the default Ansible settings:  
+````
+inventory          = $HOME/git/ansible-dump1090/hosts
+roles_path         = $HOME/git/ansible-dump1090/roles
+host_key_checking  = False
+remote_user        = pi 
+log_path           = /tmp/ansible.log
+become_method      = sudo
+````
+  
+Before you start any playbook: Change the default location for ansible.cfg on your Ansible management host using:
 ````
 pi@raspberry-1:~ $ export ANSIBLE_CONFIG="$HOME/git/ansible-dump1090/ansible.cfg"
 ````
-Add this line to your '~/.profile', to be sure it is set every time you use Ansible.  
+And also add this line to your '~/.profile', to be sure it is set every time you use Ansible.  
       
-## Add your dump1090 hosts to your Ansible 'hosts' file
+## Add your dump1090 hosts to your Ansible 'inventory' file
   
-Add your dump1090 hosts to the '$HOME/git/ansible-dump1090/hosts' file on your Ansible management host, for example:
+The [$HOME/git/ansible-dump1090/hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/hosts) inventory file contains groups of hosts. This way you can apply some tasks on one group of hosts and other tasks on an other group of hosts.  
+  
+Add your own dump1090 hosts to the '$HOME/git/ansible-dump1090/hosts' inventory file on your Ansible management host, for example:
 ````
 # Raspberry Pi 1B, 2B+, 3B - Raspbian Jessie 4.4.38-v7+
 [raspbian]
@@ -189,7 +201,7 @@ orangepi-7
   
 ## Test Ansible
   
-Now test Ansible from your Ansible management host: 
+Now test Ansible from your Ansible management host and execute a command on multiple hosts: 
 ````
 pi@raspberry-1:~ $ ansible all -a "/bin/echo hello"
 raspberry-5 | SUCCESS | rc=0 >>
@@ -213,9 +225,9 @@ hello
 raspberry-1 | SUCCESS | rc=0 >>
 hello
 ````
-Note: In this example 'all' is a group name. Therefor a section [all] should be present within your '$HOME/git/ansible-dump1090/hosts' file containing your dump1090 hostnames!   
+Note: In this example 'all' is a group name. Therefor a section [all] should be present within your '$HOME/git/ansible-dump1090/hosts' inventory file containing your dump1090 hostnames!   
   
-Now you can do things like updating a ip address of host raspberry-2 in /etc/hosts on all your dump1090 hosts:  
+Now you can do things like updating a ip address of host raspberry-2 in '/etc/hosts' on all your dump1090 hosts:  
 ````
 pi@raspberry-1:~ $ ansible all -a "sudo sed -i 's/192\.168\.11\.7 raspberry-2/192\.168\.11\.34 raspberry-2/' /etc/hosts" 
 raspberry-3 | SUCCESS | rc=0 >>
@@ -241,9 +253,9 @@ raspberry-1 | SUCCESS | rc=0 >>
   
 ## Run a playbook  
 
-Using Ansible you can execute commands on multiple hosts. Using Ansible playbooks you can execute scripts (in yml format) that take care deployment and configuration on multiple hosts.
+Using Ansible you can execute commands on multiple hosts. But using Ansible playbooks you can execute scripts (in yml format) that take care of deployment and configuration on multiple hosts.
   
-In this example I run a playbook only on one host (as configured in installbasics.yml):
+In this example I run a playbook all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)):
 ````
 $ ansible-playbook installbasics.yml
 
