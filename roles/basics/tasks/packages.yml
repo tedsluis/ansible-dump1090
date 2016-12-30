@@ -11,12 +11,14 @@
   - cron 
   - curl
   - debhelper 
-  - git
+  - git 
+  - mailutils
   - netcat 
   - net-tools 
   - nmap
   - python2.7 
   - rsync
+  - ssmtp
   - vim
   - wget
   become: true
