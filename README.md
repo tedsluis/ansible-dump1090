@@ -303,7 +303,8 @@ playbook: installbasics.yml
 ````
 But I advice you to look through the code. It is readable if you have some Linux experience.  
   
-You may want to try the playbooks on a fresh SD card before run it on your existing dump1090 hosts...
+You may want to try the playbooks on a fresh SD card before run it on your existing dump1090 hosts...  
+  
 And you should set some default variables like: username, email, dump1090-mutability git repo, etc. You can find the configuration files with variables in '$Home/git/ansible-dump1090/group_vars'.  
   
 In this example I run a playbook all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)):
