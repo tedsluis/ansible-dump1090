@@ -1,0 +1,17 @@
+---
+# motd login screen for raspberry
+# ted.sluis@gmail.com
+
+# Copies motd.sh to /etc/profile.d/motd.sh
+- hosts: raspbian
+  tasks:
+  - name: Copies motd.sh to /etc/profile.d/motd.sh for raspbian only
+    copy:
+      src: ../files/motd.sh
+      dest: /etc/profile.d/motd.sh
+      owner: pi
+      group: pi
+      mode: 0755
+    become: true
+
+

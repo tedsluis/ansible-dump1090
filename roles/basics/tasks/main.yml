@@ -13,4 +13,4 @@
 - include: cronjobs.yml
 - include: timezone.yml
 - include: mail.yml
-
+- include: motd.yml
