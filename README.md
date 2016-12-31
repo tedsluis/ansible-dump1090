@@ -188,6 +188,11 @@ raspberry-4
 raspberry-5
 orangepi-7
 
+[mydump1090]
+raspberry-2
+raspberry-3
+orangepi-6
+
 [all]
 raspberry-[1:7]
 
