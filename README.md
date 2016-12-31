@@ -261,7 +261,49 @@ raspberry-1 | SUCCESS | rc=0 >>
   
 ## Run a playbook  
  
-Before you run my playbooks, you should check what thay do! You may want to try them on a fresh SD card before run it on a existing dump1090 instance...
+Before you run my playbooks, you should inspect what you are about to execute!  
+  
+This way you can list all the playbook task:  
+````
+$ ansible-playbook --list-tasks installbasics.yml
+
+playbook: installbasics.yml
+
+  play #1 (dump1090): install basic packages and configure basic setting.
+    tasks:
+      basics : Install basic packages.
+      basics : Creates {{ gitdirectory }} directory.
+      basics : Check if {{ gitconfig }} exists.
+      basics : Touch {{ gitconfig }} if not exists.
+      basics : Add [user] section to .gitconfig.
+      basics : Add 'name = {{ myusername }}'  to .gitconfig.
+      basics : Add 'email = {{ emailaddress }}'  to .gitconfig.
+      basics : Add section [push] to .gitconfig.
+      basics : Add 'default = matching'  to .gitconfig.
+      basics : Check if /home/pi/connect.dump.sh exists.
+      basics : Touch /home/pi/connect.dump.sh if not exists.
+      basics : Add /home/pi/connect.dump.sh to /etc/rc.local.
+      basics : Insert alias ll into .profile.
+      basics : Insert alias tmp into .profile.
+      basics : Insert alias www into .profile.
+      basics : Insert alias etc into .profile.
+      basics : Insert alias git into .profile.
+      basics : Insert alias log into .profile.
+      basics : Set vim syntax no (globaly).
+      basics : Update /etc/hosts from inventory.
+      basics : schedule apt-get update & upgrade every cronjob friday 0am.
+      basics : schedule reboot cronjob every friday 3am.	
+      basics : set timezone to {{ mytimezone }}.
+      basics : Configure mailhub={{ mymailhub }} in /etc/ssmtp/ssmtp.conf
+      basics : Configure AuthUser={{ emailaddress }} in /etc/ssmtp/ssmtp.conf.
+      basics : Configure AuthPass=........ in /etc/ssmtp/ssmtp.conf.
+      basics : Configure FromLineOverride=NO in /etc/ssmtp/ssmtp.conf.
+      basics : Configure UseSTARTTLS=YES in /etc/ssmtp/ssmtp.conf.
+      basics : Copies motd.sh to /etc/profile.d/motd.sh for raspbian only.
+````
+But I advice you to look through the code. It is readable if you have some Linux experience.  
+  
+You may want to try the playbooks on a fresh SD card before run it on your existing dump1090 hosts...
 And you should set some default variables like: username, email, dump1090-mutability git repo, etc. You can find the configuration files with variables in '$Home/git/ansible-dump1090/group_vars'.  
   
 In this example I run a playbook all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)):
