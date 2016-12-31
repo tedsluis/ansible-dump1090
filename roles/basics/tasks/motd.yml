@@ -2,15 +2,17 @@
 # motd login screen for raspberry
 # ted.sluis@gmail.com
 
+# http://docs.ansible.com/ansible/copy_module.html
+
 # Copies motd.sh to /etc/profile.d/motd.sh
 - name: "Copies motd.sh to /etc/profile.d/motd.sh for raspbian only"
   copy:
-    src: '../files/motd.sh'
+    src: 'files/motd.sh'
     dest: '/etc/profile.d/motd.sh'
     owner: pi
     group: pi
     mode: 0755
-  when: "'raspbian' in {{ group_names }}"
+  when: "'raspbian' in group_names"
   become: true
 
 

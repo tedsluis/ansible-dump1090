@@ -10,50 +10,46 @@
 
 # Ex 1: Ungrouped hosts, specify before any group headers.
 
-
 # Raspberry Pi - Raspbian Jessie 4.4.38-v7+
 [raspbian]
-ted1090-1
-ted1090-2
-ted1090-3
-ted1090-4
-ted1090-5
+ted1090-[1-5]
 
 # Orange Pi 2 plus - Armbian 3.4.112-sun8i
 [armbian]
-ted1090-6
-ted1090-7
+ted1090-[6-7]
 
-[dump1090]
-ted1090-1
-ted1090-2
-ted1090-3
-ted1090-4
-ted1090-5
-ted1090-6
-ted1090-7
-
+# All linux systems
 [all]
+ted1090-[1-7]
+
+# dump1090 mutability modified by Ted Sluis
+[mydump1090]
 ted1090-1
-ted1090-2
 ted1090-3
 ted1090-4
 ted1090-5
 ted1090-6
 ted1090-7
+
+# dump1090 mutability by Oliver Jowett's
+# [dump1090]
+ted1090-2
 
 # These groups are meant to define the reboot order of the hosts.
 # check 'group_vars/reboot-order-....' for more info.
+# immediately reboot...
 [reboot-order-first]
 ted1090-2
 ted1090-3
 ted1090-4
 ted1090-7
 
+# 3 minutes later...
 [reboot-order-second]
 ted1090-1
 ted1090-6
 
+# 6 minutes later...
 [reboot-order-third]
 ted1090-5
 
