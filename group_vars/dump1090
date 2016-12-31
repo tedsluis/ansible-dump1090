@@ -1,16 +1,3 @@
-# Choose one git repo with config file or the other! 
-
-
-
-
-
-# Ted Sluis version of dump1090 mutability:
-dump1090_repository: https://github.com/tedsluis/dump1090.git
-
-
-
-
-
 # The original Dump1090 mutability by Oliver Jowett's:
-#dump1090_repository: https://github.com/mutability/dump1090.git
+dump1090_repository: https://github.com/mutability/dump1090.git
 
