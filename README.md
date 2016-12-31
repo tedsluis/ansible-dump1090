@@ -36,7 +36,11 @@ Ansible needs to be installed on only one 'management' host. This could be a ras
 
 Ansible is open source software (maintained by Red Hat) and is used on a wide variety of linux distro's.  
   
-## Types of playbooks  
+## Ansible playbooks  
+
+Using Ansible you can execute commands on multiple hosts. But using Ansible [playbooks](http://docs.ansible.com/ansible/playbooks.html) you can execute scripts (in [yaml format](http://docs.ansible.com/ansible/YAMLSyntax.html)) that take care of deployment and configuration on multiple hosts.  
+   
+To make life easy I use these Ansible playbooks. 
   
 Playbook                                                                                            | Description                                            | Tasks                | Group variables             |
 ----------------------------------------------------------------------------------------------------|--------------------------------------------------------|----------------------|-----------------------------|
@@ -45,14 +49,14 @@ Playbook                                                                        
   
 ## Install Ansible  
   
-To install Ansible on your management system.   
+To install Ansible on your own management system.   
 ````
 pi@raspberry-1:~ $ sudo apt-get update
 pi@raspberry-1:~ $ sudo apt-get install ansible
 ````
-Check here the installation notes for other linux distro's: http://docs.ansible.com/ansible/intro_installation.html  
+Check here the installation notes for all linux distro's: http://docs.ansible.com/ansible/intro_installation.html  
 
-By default it store its configuration files in /etc/ansible. By we will change this in a minute (see below).  
+By default it stores its configuration files in /etc/ansible. By we will change this in a minute (see below).  
     
 ## Generate SSH key  
   
@@ -166,22 +170,17 @@ And also add this line to your '~/.profile', to be sure it is set every time you
       
 ## Add your dump1090 hosts to your Ansible 'inventory' file
   
-The [$HOME/git/ansible-dump1090/hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/hosts) inventory file contains groups of hosts. This way you can apply some tasks on one group of hosts and other tasks on an other group of hosts.  
+The [$HOME/git/ansible-dump1090/hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/hosts) [inventory file](http://docs.ansible.com/ansible/intro_inventory.html) contains groups of hosts. This way you can apply some tasks on one group of hosts and other tasks on an other group of hosts.  
   
 Add your own dump1090 hosts to the '$HOME/git/ansible-dump1090/hosts' inventory file on your Ansible management host, for example:
 ````
 # Raspberry Pi 1B, 2B+, 3B - Raspbian Jessie 4.4.38-v7+
 [raspbian]
-raspberry-1
-raspberry-2
-raspberry-3
-raspberry-4
-raspberry-5
+raspberry-[1:5]
 
 # Orange Pi 2 plus - Armbian 3.4.112-sun8i
 [armbian]
-orangepi-6
-orangepi-7
+orangepi-[6:7]
 
 [dump1090]
 raspberry-1
@@ -190,13 +189,7 @@ raspberry-5
 orangepi-7
 
 [all]
-raspberry-1
-raspberry-2
-raspberry-3
-raspberry-4
-raspberry-5
-orangepi-6
-orangepi-7
+raspberry-[1:7]
 
 # The groups below are meant to define the reboot order of the hosts.
 # check 'group_vars/reboot-order-....' for more info.
@@ -267,10 +260,8 @@ raspberry-1 | SUCCESS | rc=0 >>
 ````
   
 ## Run a playbook  
-
-Using Ansible you can execute commands on multiple hosts. But using Ansible playbooks you can execute scripts (in yml format) that take care of deployment and configuration on multiple hosts.  
-  
-Note: Before you run my playbooks, you should check what thay do! You may want to try it on a fresh SD card before run it on a existing dump1090 instance...
+ 
+Before you run my playbooks, you should check what thay do! You may want to try them on a fresh SD card before run it on a existing dump1090 instance...
 And you should set some default variables like: username, email, dump1090-mutability git repo, etc. You can find the configuration files with variables in '$Home/git/ansible-dump1090/group_vars'.  
   
 In this example I run a playbook all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)):
@@ -289,13 +280,13 @@ ok: [raspberry-2]
 ok: [raspberry-1]
 
 TASK [basics : Install basic packages] *****************************************
-ok: [raspberry-5] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
-ok: [raspberry-3] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
-ok: [raspberry-4] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
-ok: [orangepi-6]  => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
-ok: [orangepi-7]  => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
-ok: [raspberry-2] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
-ok: [raspberry-1] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'vim', u'wget'])
+changed: [raspberry-5] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
+changed: [raspberry-3] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
+ok: [raspberry-4] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
+ok: [orangepi-6]  => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
+ok: [orangepi-7]  => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
+ok: [raspberry-2] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
+ok: [raspberry-1] => (item=[u'apt-utils', u'cron', u'curl', u'debhelper', u'git', u'mailutils', u'netcat', u'net-tools', u'nmap', u'python2.7', u'rsync', u'ssmtp', u'vim', u'wget'])
 
 TASK [basics : Creates /home/pi/git directory] *********************************
 ok: [raspberry-5]
@@ -537,15 +528,69 @@ ok: [raspberry-5]
 changed: [raspberry-2]
 ok: [raspberry-1]
 
+TASK [basics : Configure mailhub=smtp.gmail.com:587 in /etc/ssmtp/ssmtp.conf] **
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+ok: [ted1090-2]
+ok: [raspberry-1]
+
+TASK [basics : Configure AuthUser=ted.sluis@gmail.com in /etc/ssmtp/ssmtp.conf] 
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+ok: [ted1090-2]
+ok: [raspberry-1]
+
+TASK [basics : Configure AuthPass=........ in /etc/ssmtp/ssmtp.conf] ***********
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+ok: [ted1090-2]
+ok: [raspberry-1]
+
+TASK [basics : Configure FromLineOverride=NO in /etc/ssmtp/ssmtp.conf] *********
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+ok: [ted1090-2]
+
+TASK [basics : Configure UseSTARTTLS=YES in /etc/ssmtp/ssmtp.conf] *************
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+ok: [ted1090-2]
+ok: [raspberry-1]
+
+TASK [basics : Copies motd.sh to /etc/profile.d/motd.sh for raspbian only] *****
+ok: [raspberry-3]
+ok: [raspberry-4]
+changed: [orangepi-6]
+changed: [orangepi-7]
+ok: [raspberry-5]
+ok: [ted1090-2]
+ok: [raspberry-1]
+
 PLAY RECAP *********************************************************************
-raspberry-1                  : ok=24   changed=6    unreachable=0    failed=0   
-raspberry-2                  : ok=24   changed=18   unreachable=0    failed=0   
-raspberry-3                  : ok=24   changed=6    unreachable=0    failed=0   
-raspberry-4                  : ok=24   changed=6    unreachable=0    failed=0   
-raspberry-5                  : ok=24   changed=0    unreachable=0    failed=0   
-orangepi-6                   : ok=24   changed=7    unreachable=0    failed=0   
-orangepi-7                   : ok=24   changed=7    unreachable=0    failed=0 
+raspberry-1                  : ok=30   changed=6    unreachable=0    failed=0   
+raspberry-2                  : ok=30   changed=18   unreachable=0    failed=0   
+raspberry-3                  : ok=30   changed=7    unreachable=0    failed=0   
+raspberry-4                  : ok=30   changed=6    unreachable=0    failed=0   
+raspberry-5                  : ok=30   changed=1    unreachable=0    failed=0   
+orangepi-6                   : ok=30   changed=13   unreachable=0    failed=0   
+orangepi-7                   : ok=30   changed=13   unreachable=0    failed=0 
 ````
+In the PLAY RECAP above here you can see how many task were executed and how many actual change something on each individual host.  
   
 ## Logging
   
