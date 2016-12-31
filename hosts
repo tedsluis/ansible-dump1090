@@ -12,15 +12,15 @@
 
 # Raspberry Pi - Raspbian Jessie 4.4.38-v7+
 [raspbian]
-ted1090-[1-5]
+ted1090-[1:5]
 
 # Orange Pi 2 plus - Armbian 3.4.112-sun8i
 [armbian]
-ted1090-[6-7]
+ted1090-[6:7]
 
 # All linux systems
 [all]
-ted1090-[1-7]
+ted1090-[1:7]
 
 # dump1090 mutability modified by Ted Sluis
 [mydump1090]
