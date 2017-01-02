@@ -1,0 +1,45 @@
+---
+# These task will do the basic configuration for a dump1090 host.
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/stat_module.html
+
+# Check if .gitconfig exists
+- name: "Check if /etc/modprobe.d/rtl-sdr-blacklist.conf exists"
+  stat: 
+    path: "/etc/modprobe.d/rtl-sdr-blacklist.conf"
+  register: stateblacklist
+
+# http://docs.ansible.com/ansible/file_module.html
+
+# Touch /etc/modprobe.d/rtl-sdr-blacklist.conf if not exists
+- name: "Touch /etc/modprobe.d/rtl-sdr-blacklist.conf if not exists"
+  file: 
+    path: "/etc/modprobe.d/rtl-sdr-blacklist.conf"
+    state: touch
+    owner: pi
+    group: pi
+    mode: 0775
+  when: stateblacklist.stat.exists is undefined or stateblacklist.stat.exists == False 
+  become: true
+
+# http://docs.ansible.com/ansible/lineinfile_module.html
+
+# Add to /etc/modprobe.d/rtl-sdr-blacklist.conf
+- name: "Add  section to /etc/modprobe.d/rtl-sdr-blacklist.conf"
+  lineinfile: dest="/etc/modprobe.d/rtl-sdr-blacklist.conf" regexp='^blacklist {{ item }}$' state=present line="blacklist {{ item }}"
+  with_items: 
+  - dvb_usb_rtl2832u
+  - dvb_usb_rtl28xxu
+  - dvb_usb_v2
+  - e4000
+  - r820t
+  - rtl2830
+  - rtl_2830
+  - rtl2832
+  - rtl2832U
+  - rtl2838
+  - RTL2838UHIDIR
+  become: true
+
+
