@@ -16,3 +16,6 @@ emailpassword: <password>
 
 # default timezone
 mytimezone: Europe/Amsterdam
+
+# Get current timestamp 
+timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"

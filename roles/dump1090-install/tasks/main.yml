@@ -6,7 +6,10 @@
 
 # Install new dump1090 from build directory
 - name: Install dump1090
-  apt: deb={{ builddirectory }}/dump1090-mutability_1.15~dev_armhf.deb
+  command: "dpkg -i {{ builddirectory }}/dump1090-mutability_1.15~dev_armhf.deb"
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+    DEBIAN_PRIORITY: critical
   become: true
 
 # http://docs.ansible.com/ansible/command_module.html

@@ -1,3 +1,7 @@
 # The original Dump1090 mutability by Oliver Jowett's:
 dump1090_repository: https://github.com/mutability/dump1090.git
 
+# config files roles/dump1090-configure/files:
+defaultdump1090mutability: dump1090-mutability
+configjs: config.js
+
