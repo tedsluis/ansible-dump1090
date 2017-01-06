@@ -1,0 +1,7 @@
+# This file was created automatically during an upgrade from PiAware 
+# Additional piaware configuration settings may be added below.
+
+allow-manual-updates yes   # updated by fa_piaware_config
+allow-auto-updates no   # updated by fa_piaware_config
+flightaware-user tedsluis   # updated by fa_piaware_config
+flightaware-password <yourpassword>  # updated by fa_piaware_config

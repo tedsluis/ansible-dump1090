@@ -1,0 +1,8 @@
+# install piaware
+# ted.sluis@gmail.com
+
+- name: install piaware
+  hosts: ted1090-5
+  remote_user: pi
+  roles:
+  - piaware-install
