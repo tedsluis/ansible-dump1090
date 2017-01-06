@@ -46,8 +46,18 @@
 - name: "Copies files/{{ configjs }} to /usr/share/dump1090-mutability/html/config.js"
   copy:
     src: "files/{{ configjs }}"
-    dest: '/etc/default/config.js'
+    dest: '/usr/share/dump1090-mutability/html/config.js'
     owner: pi
     group: pi
     mode: 0644
+  become: true
+
+# http://docs.ansible.com/ansible/service_module.html
+
+# Restart dump1090
+- name: Restart dump1090-mutability
+  service:
+    name: dump1090-mutability
+    state: restarted
+    enabled: yes
   become: true
