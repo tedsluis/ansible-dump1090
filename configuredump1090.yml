@@ -1,0 +1,8 @@
+# configure dump1090
+# ted.sluis@gmail.com
+
+- name: configure dump1090
+  hosts: ted1090-5
+  remote_user: pi
+  roles:
+  - dump1090-configure
