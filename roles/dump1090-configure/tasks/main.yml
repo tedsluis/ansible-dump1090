@@ -45,8 +45,8 @@
 # Copies files/config.js to /usr/share/dump1090-mutability/html/config.js
 - name: "Copies files/{{ configjs }} to /usr/share/dump1090-mutability/html/config.js"
   copy:
-    src: "files/{{ defaultdump1090mutability }}"
-    dest: '/etc/default/dump1090-mutability'
+    src: "files/{{ configjs }}"
+    dest: '/etc/default/config.js'
     owner: pi
     group: pi
     mode: 0644
