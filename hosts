@@ -25,15 +25,15 @@ ted1090-[1:7]
 # dump1090 mutability modified by Ted Sluis
 [mydump1090]
 ted1090-1
+ted1090-2
 ted1090-3
 ted1090-4
-ted1090-5
 ted1090-6
 ted1090-7
 
 # dump1090 mutability by Oliver Jowett's
 [dump1090]
-ted1090-2
+ted1090-5
 
 # These groups are meant to define the reboot order of the hosts.
 # check 'group_vars/reboot-order-....' for more info.
