@@ -19,3 +19,7 @@ mytimezone: Europe/Amsterdam
 
 # Get current timestamp 
 timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
+
+# Piaware 
+piawarepackage: piaware-repository_3.1.0_all.deb
+
