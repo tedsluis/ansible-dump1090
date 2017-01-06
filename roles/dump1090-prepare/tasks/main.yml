@@ -44,11 +44,11 @@
   become: true
 
 - name: Install rtl-sdr arm packages
-  apt: deb=/tmp/{{ item }}
+  shell: "dpkg -i /tmp/{{ item }}"
   with_items:
-  - rtl-sdr_0.5.4.git-1_armhf.deb
-  - librtlsdr-dev_0.5.4.git-1_armhf.deb 
   - librtlsdr0_0.5.4.git-1_armhf.deb  
+  - librtlsdr-dev_0.5.4.git-1_armhf.deb 
+  - rtl-sdr_0.5.4.git-1_armhf.deb
   become: true
   
 - name: Refresh cache
