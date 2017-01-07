@@ -1,5 +1,5 @@
 ---
-# These task will do the basic configuration for a dump1090 host.
+# These task will configure aliases in the '.profile' of the dump1090 host.
 # ted.sluis@gmail.com
 
 # http://docs.ansible.com/ansible/lineinfile_module.html
