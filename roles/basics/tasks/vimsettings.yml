@@ -1,11 +1,11 @@
 ---
-# These task will do the basic configuration for a dump1090 host.
+# These task will do the vim configuration for a dump1090 host.
 # ted.sluis@gmail.com
 
 # http://docs.ansible.com/ansible/lineinfile_module.html
 
 # Set vim syntax highlighting on
-- name: Set vim syntax no (globaly)
+- name: "Set vim syntax no (globaly) in /etc/vim/vimrc."
   lineinfile:
     dest: /etc/vim/vimrc
     regexp: '^"?syntax on'
