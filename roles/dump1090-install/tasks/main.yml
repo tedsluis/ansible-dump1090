@@ -6,7 +6,7 @@
 
 # Install new dump1090 from build directory
 - name: Install dump1090
-  command: "dpkg -i {{ builddirectory }}/dump1090-mutability_1.15~dev_armhf.deb"
+  command: "dpkg -i {{ builddirectory }}/dump1090-mutability_1.15~dev_armhf.deb."
   environment:
     DEBIAN_FRONTEND: noninteractive
     DEBIAN_PRIORITY: critical
@@ -15,7 +15,7 @@
 # http://docs.ansible.com/ansible/command_module.html
 
 # Enable lighttpd dump1090
-- name: Enable lighttpd dump1090
+- name: "Enable lighttpd dump1090."
   command: lighttpd-enable-mod dump1090
   ignore_errors: yes
   notify: restart lighttpd
