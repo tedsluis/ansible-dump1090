@@ -1,0 +1,8 @@
+# reboot hosts
+# ted.sluis@gmail.com
+
+- name: reboot hosts
+  hosts: all
+  remote_user: pi
+  roles:
+  - reboot

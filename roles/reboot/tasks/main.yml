@@ -1,0 +1,13 @@
+---
+# These tasks will reboot the hosts
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/shell_module.html
+
+# Wait and reboot
+- name: "Wait {{ rebootdelay }} minutes and reboot."
+  shell: "sleep {{ rebootdelay }}m && reboot"
+  become: true
+
+
+
