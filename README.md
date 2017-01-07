@@ -59,7 +59,7 @@ Playbook | Description | Tasks | Group variables &amp<br>template files |
 [installpiaware.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installpiaware.yml])| Does the install and<br> configuration of Piaware.|[install](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/piaware-install/tasks/main.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[roles/piaware-install/files/piaware-config.txt](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/piaware-install/files/piaware-config.txt)|
 [reboot.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/reboot.yml)| Performs a reboot in three batches:<br> First batch immediately.<br> Second batch after 3 minutes.<br> Third batch after 6 minutes.|[reboot](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/reboot/tasks/main.yml)|[group_vars/reboot-order-first](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-first)<br>[group_vars/reboot-order-second](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-second)<br>[group_vars/reboot-order-third](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-third)|
   
-Note: You should configure your personal setting in the 'group variables & template files'.  
+Note: You should configure your personal setting in the 'group variables & template files' and add your hosts to the correct groups within '$HOME/git/ansible-dump1090/hosts'.
   
 ## Install Ansible  
   
