@@ -1,5 +1,5 @@
 ---
-# These task will do the basic configuration for a dump1090 host.
+# These task will configure cronjobs for the dump1090 host.
 # ted.sluis@gmail.com
 
 # http://docs.ansible.com/ansible/cron_module.html
@@ -13,7 +13,9 @@
     weekday: "5"
     job: "sudo apt-get update && sudo apt-get upgrade -y"
   become: true
-- name: schedule reboot cronjob every friday 3am.
+
+# Weekly reboot with a rebootdelay
+- name: schedule reboot cronjob every friday 3am with a delay of {{ rebootdelay }}.
   cron:
     name: "schedule reboot cronjob every friday 3am."
     minute: "{{ rebootdelay }}"
