@@ -42,16 +42,18 @@ Using Ansible you can execute commands on multiple hosts. But using Ansible [pla
    
 To make life easy I use these Ansible playbooks. 
   
-Playbook | Description | Tasks | Group variables<br>template files |
+Playbook | Description | Tasks | Group variables &amp<br>template files |
 ---------|-------------|-------|-----------------|
-[installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and<br> configuration of hosts. |[packages](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/packages.yml)<br>[git settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/git.yml)<br>[run script](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/connectdumpsh.yml)<br>[aliasses](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/aliasses.yml)<br>[vim settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/vimsettings.yml)<br>[/etc/hosts file](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/etchosts.yml)<br>[crontab jobs](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/cronjobs.yml)<br>[time zone](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/timezone.yml)<br>[send mail](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/mail.yml)<br>[motd](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/motd.yml)<br>[blacklist](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/blacklist.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[group_vars/reboot-order-first](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-first)<br>[group_vars/reboot-order-second](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-second)<br>[group_vars/reboot-order-third](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-third)<br>[roles/basics/files/hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/files/hosts)<br>[roles/basics/files/motd.sh](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/files/motd.sh)|
-[fullinstalldump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/fullinstalldump1090.yml)| Does the prepare, building, installation<br> and configuration of dump1090.| [prepare](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-prepare/tasks/main.yml)<br>[build](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-build/tasks/main.yml)<br>[install task](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/tasks/main.yml)<br>[install handler](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/handlers/main.yml)<br>[configure](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/tasks/main.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[roles/dump1090-configure/files/config.js](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js)<br>[roles/dump1090-configure/files/config.js.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js.my)<br>[roles/dump1090-configure/files/dump1090-mutability](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability)<br>[roles/dump1090-configure/files/dump1090-mutability.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability.my) |
-[builddump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/builddump1090.yml)| Does the clone and build of<br> dump1090 only.|[build](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-build/tasks/main.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br>[group_vars/mydump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/mydump1090)|
+[installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)     | Does the basic installation and<br> configuration of raspberry pi's<br> with raspbian and orange pi's<br> with armbian. No specific actions<br> for dump1090 in this playbook. |[packages](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/packages.yml)<br>[git settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/git.yml)<br>[run script](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/connectdumpsh.yml)<br>[aliasses](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/aliasses.yml)<br>[vim settings](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/vimsettings.yml)<br>[/etc/hosts file](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/etchosts.yml)<br>[crontab jobs](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/cronjobs.yml)<br>[time zone](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/timezone.yml)<br>[send mail](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/mail.yml)<br>[motd](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/motd.yml)<br>[blacklist](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/tasks/blacklist.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[group_vars/reboot-order-first](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-first)<br>[group_vars/reboot-order-second](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-second)<br>[group_vars/reboot-order-third](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-third)<br>[roles/basics/files/hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/files/hosts)<br>[roles/basics/files/motd.sh](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/basics/files/motd.sh)|
+[fullinstalldump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/fullinstalldump1090.yml)| Does the prepare, cloning, building,<br> installation and configuration<br> of dump1090. | [prepare](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-prepare/tasks/main.yml)<br>[build](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-build/tasks/main.yml)<br>[install task](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/tasks/main.yml)<br>[install handler](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/handlers/main.yml)<br>[configure](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/tasks/main.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[roles/dump1090-configure/files/config.js](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js)<br>[roles/dump1090-configure/files/config.js.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js.my)<br>[roles/dump1090-configure/files/dump1090-mutability](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability)<br>[roles/dump1090-configure/files/dump1090-mutability.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability.my) |
+[builddump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/builddump1090.yml)| Does the cloning and building of<br> dump1090 only.|[build](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-build/tasks/main.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br>[group_vars/mydump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/mydump1090)|
 [installdump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installdump1090.yml)| Does the install and configuration<br> of dump1090.|[install task](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/tasks/main.yml)<br>[install handler](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-install/handlers/main.yml)<br>[configure](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/tasks/main.yml)|[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br>[group_vars/mydump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/mydump1090)<br>[roles/dump1090-configure/files/config.js](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js)<br>[roles/dump1090-configure/files/config.js.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js.my)<br>[roles/dump1090-configure/files/dump1090-mutability](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability)<br>[roles/dump1090-configure/files/dump1090-mutability.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability.my)|
 [configuredump1090.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/configuredump1090.yml)| Does the configuration of<br> dump1090.|[configure](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/tasks/main.yml)|[group_vars/dump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/dump1090)<br>[group_vars/mydump1090](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/mydump1090)<br>[roles/dump1090-configure/files/config.js](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js)<br>[roles/dump1090-configure/files/config.js.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/config.js.my)<br>[roles/dump1090-configure/files/dump1090-mutability](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability)<br>[roles/dump1090-configure/files/dump1090-mutability.my](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump1090-configure/files/dump1090-mutability.my)|
 [installdump-tools.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installdump-tools.yml)| Does the install of<br> dump1090-tools.|[nstall](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/dump-tools-install/tasks/main.yml)||
 [installpiaware.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installpiaware.yml])| Does the install and<br> configuration of Piaware.|[install](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/piaware-install/tasks/main.yml)|[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)<br>[roles/piaware-install/files/piaware-config.txt](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/piaware-install/files/piaware-config.txt)|
 [reboot.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/reboot.yml)| Performs a reboot in three batches:<br> First batch immediately.<br> Second batch after 3 minutes.<br> Third batch after 6 minutes.|[reboot](https://github.com/tedsluis/ansible-dump1090/blob/master/roles/reboot/tasks/main.yml)|[group_vars/reboot-order-first](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-first)<br>[group_vars/reboot-order-second](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-second)<br>[group_vars/reboot-order-third](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-third)|
+  
+Note: You should configure your personal setting in the 'group variables & template files'.  
   
 ## Install Ansible  
   
@@ -140,6 +142,8 @@ pi@raspberry-1:~ $ cd git
 pi@raspberry-1:~/git $ git clone https://github.com/tedsluis/ansible-dump1090.git
 pi@raspberry-1:~/git $ cd ansible-dump1090
 ````
+Note: to clone this repo you should have installed 'git' on your host. (sudo apt-get install git)
+  
 Check the results:   
 ````
 pi@raspberry-1:~/git/ansible-dump1090 $ ls -l
@@ -188,17 +192,20 @@ raspberry-[1:5]
 [armbian]
 orangepi-[6:7]
 
+# Hosts that should run dump1090-mutability by Oliver Jowett's, https://github.com/mutability/dump1090
 [dump1090]
 raspberry-1
 raspberry-4
 raspberry-5
 orangepi-7
 
+# Hosts that should run my version of dump1090-mutability, https://github.com/tedsluis/dump1090
 [mydump1090]
 raspberry-2
 raspberry-3
 orangepi-6
 
+# All hosts
 [all]
 raspberry-[1:7]
 
@@ -313,13 +320,15 @@ playbook: installbasics.yml
       basics : Copies motd.sh to /etc/profile.d/motd.sh for raspbian only.
       basics : Add section to /etc/modprobe.d/rtl-sdr-blacklist.conf.	
 ````
-But I advice you to look through the code. It is readable if you have some Linux experience.  
+Check out the table with [playbooks](https://github.com/tedsluis/ansible-dump1090#ansible-playbooks).  
+  
+But I advice you also to look through the code. It is readable if you have some Linux experience.  
   
 You may want to try the playbooks on a fresh SD card before run it on your existing dump1090 hosts...  
   
-And you should set some default variables like: username, email, dump1090-mutability git repo, etc. You can find the configuration files with variables in '$Home/git/ansible-dump1090/group_vars'.  
+And you should set some default variables like: username, email, hostnames, git repo, etc. You can find the configuration files with variables in '$Home/git/ansible-dump1090/group_vars'.  
   
-In the example you can see the output of a playbook that run on all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)). 
+In the example you can view the output of a playbook that run on all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)). 
 ````
 $ ansible-playbook installbasics.yml
 
@@ -652,7 +661,7 @@ In the PLAY RECAP above here you can see how many task were executed and how man
 Logging is written to '/tmp/ansible.log'.  
   
 You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
-
+  
 ## More info
   
 * http://docs.ansible.com/ansible
