@@ -5,7 +5,7 @@
 # http://docs.ansible.com/ansible/get_url_module.html
 
 # Download the rtl-sdr packages
-- name: Download rtl-sdr arm packages
+- name: "Download rtl-sdr arm packages."
   get_url: 
     url: "https://github.com/mutability/librtlsdr/releases/download/v0.5.4_git-1/{{ item }}" 
     dest: "/tmp/{{ item }}"
@@ -20,7 +20,7 @@
 # http://docs.ansible.com/ansible/apt_module.html
 
 # Install packages 
-- name: Install packages for basis dump1090 & dump-tools host
+- name: "Install packages for basis dump1090 & dump-tools host."
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
   with_items:
   - apt-utils 
@@ -43,7 +43,7 @@
   - wget
   become: true
 
-- name: Install rtl-sdr arm packages
+- name: "Install rtl-sdr arm packages."
   shell: "dpkg -i /tmp/{{ item }}"
   with_items:
   - librtlsdr0_0.5.4.git-1_armhf.deb  
@@ -51,11 +51,11 @@
   - rtl-sdr_0.5.4.git-1_armhf.deb
   become: true
   
-- name: Refresh cache
+- name: "Refresh cache."
   apt: update_cache=yes
   become: true
 
-- name: Upgrade all packages to the latest version
+- name: "Upgrade all packages to the latest version."
   apt: upgrade=full
   become: true
 
