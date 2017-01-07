@@ -1,4 +1,5 @@
 #!/bin/bash
+# More info at https://github.com/tedsluis/motd
 # Based on https://github.com/gagle/raspberrypi-motd/blob/master/motd.sh
 
 function color (){
