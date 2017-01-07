@@ -1,11 +1,11 @@
 ---
-# These task will do the basic configuration for a dump1090 host.
+# These task will do the git configuration for a dump1090 host.
 # ted.sluis@gmail.com
 
 # http://docs.ansible.com/ansible/file_module.html
 
 # Creates {{ gitdirectory }} directory
-- name: "Creates {{ gitdirectory }} directory"
+- name: "Creates {{ gitdirectory }} directory."
   file: 
     path: "{{ gitdirectory }}" 
     state: directory 
@@ -17,7 +17,7 @@
 # http://docs.ansible.com/ansible/stat_module.html
 
 # Check if .gitconfig exists
-- name: "Check if {{ gitconfig }} exists"
+- name: "Check if {{ gitconfig }} exists."
   stat: 
     path: "{{ gitconfig }}"
   register: stategitconfig
@@ -25,7 +25,7 @@
 # http://docs.ansible.com/ansible/file_module.html
 
 # Touch .gitconfig if not exists
-- name: "Touch {{ gitconfig }} if not exists"
+- name: "Touch {{ gitconfig }} if not exists."
   file: 
     path: "{{ gitconfig }}"
     state: touch
@@ -38,7 +38,7 @@
 # http://docs.ansible.com/ansible/lineinfile_module.html
 
 # Add [user] section to .gitconfig
-- name: "Add [user] section to {{ gitconfig }}"
+- name: "Add [user] section to {{ gitconfig }}."
   lineinfile:
     dest: "{{ gitconfig }}"
     regexp: '^\[user\]'
@@ -47,7 +47,7 @@
     line: '[user]'
 
 # Add 'name = username' to .gitconfig
-- name: "Add 'name = {{ myusername }}'  to .gitconfig"
+- name: "Add 'name = {{ myusername }}'  to .gitconfig."
   lineinfile:
     dest: "{{ gitconfig }}"
     regexp: 'name'
@@ -56,7 +56,7 @@
     line: "name = {{ myusername }}"
 
 # Add 'email = emailaddress' to .gitconfig
-- name: "Add 'email = {{ emailaddress }}'  to {{ gitconfig }}"
+- name: "Add 'email = {{ emailaddress }}'  to {{ gitconfig }}."
   lineinfile:
     dest: "{{ gitconfig }}"
     regexp: 'email'
@@ -65,7 +65,7 @@
     line: "email = {{ emailaddress }}"
 
 # Add section [push] to .gitconfig
-- name: "Add section [push] to {{ gitconfig }}"
+- name: "Add section [push] to {{ gitconfig }}."
   lineinfile:
     dest: "{{ gitconfig }}"
     regexp: '\[push\]'
@@ -74,7 +74,7 @@
     line: '[push]'
 
 # Add 'default = matching' to .gitconfig
-- name: "Add 'default = matching'  to {{ gitconfig }}"
+- name: "Add 'default = matching'  to {{ gitconfig }}."
   lineinfile:
     dest: "{{ gitconfig }}"
     regexp: 'default'
