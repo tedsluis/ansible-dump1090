@@ -29,6 +29,7 @@
 - name: "Add  section to /etc/modprobe.d/rtl-sdr-blacklist.conf"
   lineinfile: dest="/etc/modprobe.d/rtl-sdr-blacklist.conf" regexp='^blacklist {{ item }}$' state=present line="blacklist {{ item }}"
   with_items: 
+  # Add the device name of your RTL SDR dongle
   - dvb_usb_rtl2832u
   - dvb_usb_rtl28xxu
   - dvb_usb_v2
