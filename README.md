@@ -78,7 +78,7 @@ To let Ansible log in from a your management host to your dump1090 hosts it need
 The public key '~/.ssh/id_rsa.pub' must but added to the 'home/pi/.ssh/authorized_keys' on your dump1090 hosts.   
 The private key must be stored on your management host in /home/username/.ssh/id.rsa.  
 
-### Generated SSH key pair 
+#### Generated SSH key pair 
 If you don't have a private and public SSH key yet you can generate them on your Ansible management host like this:
   
 ````
@@ -109,7 +109,7 @@ total 16
 -rw-r--r--. 1 tedsluis tedsluis  407 Dec 26 07:09 id_rsa.pub
 -rw-r--r--. 1 tedsluis tedsluis 4823 Dec 26 07:02 known_hosts
 ````
-### Distribute public SSH key to hosts
+#### Distribute public SSH key to hosts
 Now use ssh to create a directory ~/.ssh as user pi on your raspberry-2 (one of your dump1090 hosts that you want to manage using Ansible). (The directory may already exist, which is fine):  
 ````
 pi@raspberry-1:~ $ ssh pi@raspberry-2 mkdir -p .ssh
@@ -663,24 +663,19 @@ orangepi-6                   : ok=30   changed=13   unreachable=0    failed=0
 orangepi-7                   : ok=30   changed=13   unreachable=0    failed=0 
 ````
 In the PLAY RECAP above here you can see how many task were executed and how many actual change something on each individual host.  
-  
-## Logging
-  
-Logging is written to '/tmp/ansible.log'.  
-  
-You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
-  
+   
 ## Limit playbook to run on one or more hosts
 
 This is required when one wants to run a playbook against a host group, but only against one or more members of that group.
-  
-### Limit to one host
+   
+ 
+#### Limit to one host
   
 ```
 ansible-playbook installbasics.yml --limit "raspberry-5"
 ````
   
-### Limit to multiple hosts
+#### Limit to multiple hosts
   
 ````
 ansible-playbook installbasics.yml --limit "raspberry-2,orangepi-6"
@@ -692,12 +687,18 @@ Negated limit. NOTE: Single quotes MUST be used to prevent bash interpolation.
 ansible-playbook installbasics.yml --limit 'all:!raspberry-3'
 ```
   
-### Limit to host group
+#### Limit to host group
   
 ````
 ansible-playbook installbasics.yml --limit 'dump1090'
 ````
-    
+  
+## Logging
+  
+Logging is written to '/tmp/ansible.log'.  
+  
+You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
+  
 ## More info
   
 * http://docs.ansible.com/ansible
