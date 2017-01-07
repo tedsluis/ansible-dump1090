@@ -670,7 +670,7 @@ Logging is written to '/tmp/ansible.log'.
   
 You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
   
-# Limit playbook to run on one or more hosts
+## Limit playbook to run on one or more hosts
 
 This is required when one wants to run a playbook against a host group, but only against one or more members of that group.
   
