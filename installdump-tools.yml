@@ -2,7 +2,7 @@
 # ted.sluis@gmail.com
 
 - name: install dump1090-tools
-  hosts: ted1090-5
+  hosts: all
   remote_user: pi
   roles:
   - dump-tools-install

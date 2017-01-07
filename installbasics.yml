@@ -2,7 +2,7 @@
 # ted.sluis@gmail.com
 
 - name: install basic packages and configure basic settings.
-  hosts: dump1090
+  hosts: all
   remote_user: pi
   roles:
   - basics

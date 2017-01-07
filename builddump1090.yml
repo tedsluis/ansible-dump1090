@@ -2,7 +2,7 @@
 # ted.sluis@gmail.com
 
 - name: clone from git & build dump1090
-  hosts: ted1090-5
+  hosts: all
   remote_user: pi
   roles:
   - dump1090-build

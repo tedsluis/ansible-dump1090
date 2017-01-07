@@ -2,13 +2,13 @@
 # ted.sluis@gmail.com
 
 - name: install dump1090
-  hosts: ted1090-2
+  hosts: all
   remote_user: pi
   roles:
   - dump1090-install
 
 - name: configure dump1090
-  hosts: ted1090-2
+  hosts: all
   remote_user: pi
   roles:
   - dump1090-configure
