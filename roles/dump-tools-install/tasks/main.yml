@@ -7,7 +7,7 @@
 # Download the dump1090-tools installer
 - name: "Download the dump1090-tools installer"
   get_url: 
-  url: "https://raw.githubusercontent.com/tedsluis/dump1090-tools/master/dump1090-tools-install.sh" 
+    url: "https://raw.githubusercontent.com/tedsluis/dump1090-tools/master/dump1090-tools-install.sh" 
     dest: "/tmp/dump1090-tools-install.sh"
     mode: 0555
     force: yes
@@ -16,9 +16,8 @@
 # http://docs.ansible.com/ansible/apt_module.html
 
 # Install dump1090-tools
-- name: "Install dump1090-tools"
-  command: "/tmp/dump1090-tools-install.sh"
-  become: true
+- name: "Install dump1090-tools (this will take a while!)"
+  shell: "/tmp/dump1090-tools-install.sh"
 
 
 
