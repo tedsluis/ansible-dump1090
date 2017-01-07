@@ -7,13 +7,19 @@ Use [Ansible](https://www.ansible.com/) playbooks to configure dump1090 hosts. A
     * [Why manage hosts using Ansible?](#why-manage-hosts-using-ansible)
     * [Types of playbooks](#types-of-playbooks)
     * [Install Ansible](#install-ansible)
-    * [Generate SSH key](#generate-ssh-key)
+    * [Configure SSH key pair](#configure-ssh-key-pair)
+      * [Generated SSH key pair](#generated-ssh-key-pair)
+      * [Distribute public SSH key to hosts](#distribute-public-ssh-key-to-hosts)
     * [Clone this repo](#clone-this-repo)
     * [Change the default ansible.cgf location](#change-the-default-ansiblecgf-location)
     * [Add your dump1090 hosts to your Ansible 'hosts' file](#add-your-dump1090-hosts-to-your-ansible-hosts-file)
     * [Test Ansible](#test-ansible)
     * [Run a playbook](#run-a-playbook)
     * [Logging](#logging)
+    * [Limit playbook to run on one or more hosts](#limit-playbook-to-run-on-one-or-more-hosts)
+      * [Limit to one host](#limit-to-one-host)
+      * [Limit to multiple hosts](#limit-to-multiple-hosts)
+      * [Limit to host group](#limit-to-host-group)
     * [More info](#more-info)
   
 ## Why manage hosts using Ansible?  
@@ -66,12 +72,13 @@ Check here the installation notes for all linux distro's: http://docs.ansible.co
 
 By default it stores its configuration files in /etc/ansible. By we will change this in a minute (see below).  
     
-## Generate SSH key  
+## Configure SSH key pair 
   
 To let Ansible log in from a your management host to your dump1090 hosts it need a public and private SSH key.  
 The public key '~/.ssh/id_rsa.pub' must but added to the 'home/pi/.ssh/authorized_keys' on your dump1090 hosts.   
 The private key must be stored on your management host in /home/username/.ssh/id.rsa.  
 
+### Generated SSH key pair 
 If you don't have a private and public SSH key yet you can generate them on your Ansible management host like this:
   
 ````
@@ -102,6 +109,7 @@ total 16
 -rw-r--r--. 1 tedsluis tedsluis  407 Dec 26 07:09 id_rsa.pub
 -rw-r--r--. 1 tedsluis tedsluis 4823 Dec 26 07:02 known_hosts
 ````
+### Distribute public SSH key to hosts
 Now use ssh to create a directory ~/.ssh as user pi on your raspberry-2 (one of your dump1090 hosts that you want to manage using Ansible). (The directory may already exist, which is fine):  
 ````
 pi@raspberry-1:~ $ ssh pi@raspberry-2 mkdir -p .ssh
@@ -662,6 +670,34 @@ Logging is written to '/tmp/ansible.log'.
   
 You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
   
+# Limit playbook to run on one or more hosts
+
+This is required when one wants to run a playbook against a host group, but only against one or more members of that group.
+  
+### Limit to one host
+  
+```
+ansible-playbook installbasics.yml --limit "raspberry-5"
+````
+  
+### Limit to multiple hosts
+  
+````
+ansible-playbook installbasics.yml --limit "raspberry-2,orangepi-6"
+````
+  
+Negated limit. NOTE: Single quotes MUST be used to prevent bash interpolation.
+  
+````
+ansible-playbook installbasics.yml --limit 'all:!raspberry-3'
+```
+  
+### Limit to host group
+  
+````
+ansible-playbook installbasics.yml --limit 'dump1090'
+````
+    
 ## More info
   
 * http://docs.ansible.com/ansible
