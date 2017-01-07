@@ -5,13 +5,13 @@
 # http://docs.ansible.com/ansible/stat_module.html
 
 # Check whether /etc/default/dump1090-mutability exists?
-- name: "Get state /etc/default/dump1090-mutability"
+- name: "Get state /etc/default/dump1090-mutability."
   stat: 
     path: "/etc/default/dump1090-mutability"
   register: dump1090mutabilitystat
 
 # Check whether /usr/share/dump1090-mutability/html/config.js exists?
-- name: "Get state /usr/share/dump1090-mutability/html/config.js"
+- name: "Get state /usr/share/dump1090-mutability/html/config.js."
   stat: 
     path: "/usr/share/dump1090-mutability/html/config.js"
   register: configjsstat
@@ -19,13 +19,13 @@
 # http://docs.ansible.com/ansible/command_module.html
 
 # Backup /etc/default/dump1090-mutability
-- name: "Move /etc/default/dump1090-mutability to /etc/default/dump1090-mutability.{{ timestamp }}"
+- name: "Move /etc/default/dump1090-mutability to /etc/default/dump1090-mutability.{{ timestamp }}."
   command: "mv /etc/default/dump1090-mutability /etc/default/dump1090-mutability.{{ timestamp }}"
   when: dump1090mutabilitystat.stat.exists
   become: true
 
 # Backup /etc/default/dump1090-mutability 
-- name: "Move /usr/share/dump1090-mutability/html/config.js to /usr/share/dump1090-mutability/html/config.js.{{ timestamp }}"
+- name: "Move /usr/share/dump1090-mutability/html/config.js to /usr/share/dump1090-mutability/html/config.js.{{ timestamp }}."
   command: "mv /usr/share/dump1090-mutability/html/config.js /usr/share/dump1090-mutability/html/config.js.{{ timestamp }}"
   when: configjsstat.stat.exists
   become: true
@@ -33,7 +33,7 @@
 # http://docs.ansible.com/ansible/copy_module.html
 
 # Copies dump1090-mutability to /etc/default/dump1090-mutability
-- name: "Copies files/{{ defaultdump1090mutability }} to /etc/default/dump1090-mutability"
+- name: "Copies files/{{ defaultdump1090mutability }} to /etc/default/dump1090-mutability."
   copy:
     src: "files/{{ defaultdump1090mutability }}"
     dest: '/etc/default/dump1090-mutability'
@@ -43,7 +43,7 @@
   become: true
 
 # Copies files/config.js to /usr/share/dump1090-mutability/html/config.js
-- name: "Copies files/{{ configjs }} to /usr/share/dump1090-mutability/html/config.js"
+- name: "Copies files/{{ configjs }} to /usr/share/dump1090-mutability/html/config.js."
   copy:
     src: "files/{{ configjs }}"
     dest: '/usr/share/dump1090-mutability/html/config.js'
