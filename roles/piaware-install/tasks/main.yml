@@ -5,7 +5,7 @@
 # http://docs.ansible.com/ansible/get_url_module.html
 
 # Download the Piaware repo package
-- name: "Download the Piaware repo package {{ piawarepackage }}"
+- name: "Download the Piaware repo package {{ piawarepackage }}."
   get_url: 
     url: "http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.1.0_all.deb" 
     dest: "/tmp/{{ piawarepackage }}"
@@ -16,7 +16,7 @@
 # http://docs.ansible.com/ansible/apt_module.html
 
 # Install Piaware repo package from /tmp
-- name: "Install Piaware repo package from /tmp/{{ piawarepackage }}"
+- name: "Install Piaware repo package from /tmp/{{ piawarepackage }}."
   command: "dpkg -i /tmp/{{ piawarepackage }}"
   environment:
     DEBIAN_FRONTEND: noninteractive
@@ -26,7 +26,7 @@
 # http://docs.ansible.com/ansible/apt_module.html
 
 # Update repositories cache and install piaware packages
-- name: Update repositories cache and install piaware packages
+- name: "Update repositories cache and install piaware packages."
   apt:
     name: piaware
     update_cache: yes
@@ -36,7 +36,7 @@
 # # http://docs.ansible.com/ansible/copy_module.html
 
 # Copies template files/piaware-config.txt to /boot/piaware-config.txt
-- name: "Copies files/piaware-config.txt to /boot/piaware-config.txt"
+- name: "Copies files/piaware-config.txt to /boot/piaware-config.txt."
   copy:
     src: "files/piaware-config.txt"
     dest: '/boot/piaware-config.txt'
@@ -48,7 +48,7 @@
 # http://docs.ansible.com/ansible/service_module.html
 
 # Restart Piaware
-- name: Restart Piaware
+- name: "Restart Piaware."
   service:
     name: piaware
     state: restarted
