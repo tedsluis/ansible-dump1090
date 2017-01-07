@@ -5,7 +5,7 @@
 # http://docs.ansible.com/ansible/list_of_files_modules.html 
 
 # Create build directory 
-- name: Create build dir
+- name: "Create build directory {{ builddirectory }}."
   file: 
     path: "{{ builddirectory }}/dump1090"
     state: directory
@@ -13,7 +13,7 @@
 # http://docs.ansible.com/ansible/git_module.html 
 
 # Clone repo to build directory
-- name: Clone {{ dump1090_repository }} repo
+- name: "Clone {{ dump1090_repository }} repo to {{ builddirectory }}/dump1090."
   git:
     repo: "{{ dump1090_repository }}"
     dest: "{{ builddirectory }}/dump1090"
@@ -25,7 +25,7 @@
 # http://docs.ansible.com/ansible/playbooks_environment.html
 
 # build dump1090 from source
-- name: build dump1090 from source
+- name: "build dump1090 from source {{ builddirectory }}/dump1090."
   shell: dpkg-buildpackage -b
   args:
     chdir: "{{ builddirectory }}/dump1090"
