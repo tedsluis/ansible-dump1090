@@ -1,0 +1,8 @@
+# install dump1090.socket30003
+# ted.sluis@gmail.com
+
+- name: install sump1090.socket30003
+  hosts: socket30003
+  remote_user: pi
+  roles:
+  - dump1090-socket30003

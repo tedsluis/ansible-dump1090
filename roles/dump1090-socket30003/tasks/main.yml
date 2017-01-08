@@ -1,0 +1,47 @@
+---
+# These task will install dump1090-socket30003
+# ted.sluis@gmail.com
+
+# http://docs.ansible.com/ansible/file_module.html
+
+# Creates /home/pi/socket30003 directory
+- name: "Creates /home/pi/socket30003 directory."
+  file: 
+    path: "/home/pi/socket30003" 
+    state: directory 
+    owner: pi 
+    group: pi 
+    mode: 0775
+  become: true
+
+# Download the dump1090.socket30003 files
+- name: "Download the dump1090.socket30003 files."
+  get_url: 
+    url: "https://raw.githubusercontent.com/tedsluis/dump1090.socket30003/master/{{ item }}" 
+    dest: "/home/pi/socket30003/{{ item }}"
+    mode: 0775
+  with_items:
+  - socket30003.pl
+  - heatmap.pl
+  - rangeview.pl
+  - common.pm
+  - socket30003.cfg
+  become: true
+
+# Change data, log output directory 
+- name: "Change data, log output directory to {{ socket30003datadirectory }}."
+  replace:
+    dest: "/home/pi/socket30003/socket30003.cfg"
+    regexp: '/tmp'
+    replace: "{{ socket30003datadirectory }}"
+
+# http://docs.ansible.com/ansible/replace_module.html
+
+# cron jobs: Schedules dump1090.socket30003 every 5 minutes
+- name: "Schedules dump1090.socket30003 every 5 minutes"
+  cron: 
+    name: "Schedules dump1090.socket30003 every 5 minutes."
+    minute: "*/5"
+    job: "sudo /home/pi/socket30003/socket30003.pl -peer {{ socket30003peer }}"
+  become: true
+

@@ -233,6 +233,10 @@ orangepi-6
 
 [reboot-order-third]
 raspberry-5
+  
+# dump1090.socket30003 (collects flight data for heatmap)
+[socket30003]
+ted1090-6
 ````
   
 ## Test Ansible

@@ -1,0 +1,3 @@
+# dump1090.socket30003 peer host, source for flight data
+socket30003peer: ted1090-5
+socket30003datadirectory: /home/pi/data
