@@ -524,56 +524,14 @@ changed: [raspberry-2]
 ok: [raspberry-1]
 ok: [raspberry-5]
 
-TASK [basics : Update /etc/hosts from inventory] *******************************
-ok: [raspberry-5] => (item=orangepi-7)
-ok: [raspberry-3] => (item=orangepi-7)
-ok: [raspberry-4] => (item=raspberry-5)
-ok: [raspberry-1] => (item=raspberry-2)
-ok: [raspberry-5] => (item=orangepi-6)
-ok: [raspberry-3] => (item=orangepi-6)
-ok: [raspberry-4] => (item=raspberry-4)
-ok: [raspberry-5] => (item=raspberry-5)
-ok: [raspberry-3] => (item=raspberry-5)
-ok: [raspberry-2] => (item=raspberry-2)
-ok: [raspberry-4] => (item=raspberry-3)
-ok: [raspberry-5] => (item=raspberry-4)
-ok: [raspberry-3] => (item=raspberry-4)
-ok: [raspberry-3] => (item=raspberry-3)
-ok: [raspberry-5] => (item=raspberry-3)
-ok: [raspberry-4] => (item=raspberry-1)
-ok: [raspberry-3] => (item=raspberry-1)
-ok: [raspberry-5] => (item=raspberry-1)
-ok: [raspberry-4] => (item=raspberry-2)
-ok: [raspberry-3] => (item=raspberry-2)
-ok: [raspberry-5] => (item=raspberry-2)
-ok: [orangepi-6]  => (item=raspberry-2)
-ok: [orangepi-7]  => (item=raspberry-2)
-ok: [raspberry-4] => (item=orangepi-6)
-ok: [raspberry-2] => (item=raspberry-1)
-ok: [orangepi-6]  => (item=raspberry-1)
-ok: [orangepi-7]  => (item=raspberry-1)
-ok: [orangepi-6]  => (item=raspberry-3)
-ok: [orangepi-7]  => (item=raspberry-3)
-ok: [raspberry-4] => (item=orangepi-7)
-ok: [orangepi-6]  => (item=raspberry-4)
-ok: [orangepi-7]  => (item=raspberry-4)
-ok: [orangepi-6]  => (item=raspberry-5)
-ok: [orangepi-7]  => (item=raspberry-5)
-ok: [orangepi-6]  => (item=orangepi-6)
-ok: [orangepi-7]  => (item=orangepi-6)
-ok: [orangepi-6]  => (item=orangepi-7)
-ok: [orangepi-7]  => (item=orangepi-7)
-ok: [raspberry-2] => (item=raspberry-3)
-ok: [raspberry-1] => (item=raspberry-1)
-ok: [raspberry-2] => (item=raspberry-4)
-ok: [raspberry-1] => (item=raspberry-3)
-ok: [raspberry-2] => (item=raspberry-5)
-ok: [raspberry-2] => (item=orangepi-6)
-ok: [raspberry-1] => (item=raspberry-4)
-ok: [raspberry-2] => (item=orangepi-7)
-ok: [raspberry-1] => (item=raspberry-5)
-ok: [raspberry-1] => (item=orangepi-6)
-ok: [raspberry-1] => (item=orangepi-7)
+TASK [basics : Copies files/hosts to /etc/hosts] *******************************
+ok: [raspberry-5] 
+ok: [raspberry-3] 
+ok: [raspberry-4] 
+ok: [raspberry-1] 
+ok: [raspberry-2] 
+ok: [orangepi-6] 
+ok: [orangepi-7] 
 
 TASK [basics : schedule apt-get update & upgrade every cronjob friday 0am.] ****
 ok: [raspberry-5]
