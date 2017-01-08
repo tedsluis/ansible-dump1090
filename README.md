@@ -669,4 +669,8 @@ You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' i
 ## More info
   
 * http://docs.ansible.com/ansible
+* https://github.com/mutability/dump1090
+* https://github.com/tedsluis/dump1090
+* https://github.com/tedsluis/dump1090-tools
+* http://flightaware.com/adsb/piaware/install
 * ted.sluis@gmail.com
