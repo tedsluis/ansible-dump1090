@@ -653,6 +653,13 @@ ansible-playbook installbasics.yml --limit 'all:!raspberry-3'
 ansible-playbook installbasics.yml --limit 'dump1090'
 ````
   
+## Changing settings on multiple hosts
+  
+If you want to changes setting on multiple hosts with one commando you can do that like this:
+````
+$  ansible all -a "sudo sed -i 's/AuthPass=<password>/AuthPass=<your password>/' /etc/ssmtp/ssmtp.conf"
+````
+    
 ## Logging
   
 Logging is written to '/tmp/ansible.log'.  
