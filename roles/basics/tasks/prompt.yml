@@ -1,0 +1,16 @@
+---
+# These tasks will set the default command promt for a dump1090 host.
+# ted.sluis@gmail.com
+
+# https://docs.ansible.com/ansible/blockinfile_module.html
+
+# Add git branch name to bash prompt
+- name: "Add git branch name to bash prompt using .bashrc."
+  blockinfile:
+    dest: ~/.bashrc
+    block: |
+      parse_git_branch() {
+        git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+      }
+      export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+
