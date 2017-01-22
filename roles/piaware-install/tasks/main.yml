@@ -7,7 +7,7 @@
 # Download the Piaware repo package
 - name: "Download the Piaware repo package {{ piawarepackage }}."
   get_url: 
-    url: "http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.1.0_all.deb" 
+  url: "{{ piawareurl }}" 
     dest: "/tmp/{{ piawarepackage }}"
     mode: 0440
     force: yes
@@ -33,7 +33,7 @@
     state: latest
   become: true
 
-# # http://docs.ansible.com/ansible/copy_module.html
+# http://docs.ansible.com/ansible/copy_module.html
 
 # Copies template files/piaware-config.txt to /boot/piaware-config.txt
 - name: "Copies files/piaware-config.txt to /boot/piaware-config.txt."
@@ -43,6 +43,16 @@
     owner: root
     group: root
     mode: 0644
+  become: true
+
+# Configure'flightaware-password' in /boot/piaware-config.txt
+- name: "Configure'flightaware-password' in /boot/piaware-config.txt."
+  lineinfile:
+    dest: '/boot/piaware-config.txt'
+    regexp: 'flightaware-password'
+    state: present
+    insertafter: 'flightaware-user'
+    line: "flightaware-user {{ piawarepassword }}"
   become: true
 
 # http://docs.ansible.com/ansible/service_module.html

@@ -22,4 +22,5 @@ timestamp: "{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}"
 
 # Piaware 
 piawarepackage: piaware-repository_3.1.0_all.deb
-
+piawareurl: http://flightaware.com/adsb/piaware/files/packages/pool/piaware/p/piaware-support/piaware-repository_3.1.0_all.deb
+piawarepassword: <password>
