@@ -628,6 +628,13 @@ orangepi-6                   : ok=30   changed=13   unreachable=0    failed=0
 orangepi-7                   : ok=30   changed=13   unreachable=0    failed=0 
 ````
 In the PLAY RECAP above here you can see how many task were executed and how many actual change something on each individual host.  
+  
+#### Specify passwords
+  
+The installbasics.yml playbook uses the 'smtp email password' stored in 'group_vars/all' (emailpassword: <password>). But you probably don't want to store passwords with a git repo (and push them to github). You can work around this issue by specifying the password when you run the playbook:  
+````
+ansible-playbook installbasics.yml --extra-vars "emailpassword=<your password>"  
+````
    
 ## Limit playbook to run on one or more hosts
 
