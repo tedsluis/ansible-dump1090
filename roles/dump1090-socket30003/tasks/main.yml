@@ -19,6 +19,7 @@
   get_url: 
     url: "https://raw.githubusercontent.com/tedsluis/dump1090.socket30003/master/{{ item }}" 
     dest: "/home/pi/socket30003/{{ item }}"
+    force: yes
     mode: 0775
   with_items:
   - socket30003.pl
@@ -32,8 +33,8 @@
 - name: "Change data, log output directory to {{ socket30003datadirectory }}."
   replace:
     dest: "/home/pi/socket30003/socket30003.cfg"
-    regexp: '/tmp'
-    replace: "{{ socket30003datadirectory }}"
+    regexp: '^(.*)/tmp(.*)$'
+    replace: '\1{{ socket30003datadirectory }}\2'
 
 # http://docs.ansible.com/ansible/replace_module.html
 
