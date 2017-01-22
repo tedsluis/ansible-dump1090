@@ -7,7 +7,7 @@
 # Download the Piaware repo package
 - name: "Download the Piaware repo package {{ piawarepackage }}."
   get_url: 
-  url: "{{ piawareurl }}" 
+    url: "{{ piawareurl }}" 
     dest: "/tmp/{{ piawarepackage }}"
     mode: 0440
     force: yes

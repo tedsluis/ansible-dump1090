@@ -2,6 +2,6 @@
 # Additional piaware configuration settings may be added below.
 
 allow-manual-updates yes  
-allow-auto-updates no  
+allow-auto-updates no
 flightaware-user tedsluis  
 flightaware-password <yourpassword>  

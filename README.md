@@ -636,6 +636,11 @@ The installbasics.yml playbook uses the 'smtp email password' stored in 'group_v
 ansible-playbook installbasics.yml --extra-vars "emailpassword=<your password>"  
 ````
    
+Same methode is useful while executing the installpiaware.yml playbook:
+````
+ansible-playbook installpiaware.yml --extra-vars "piawarepassword=<yourpassword>"
+````
+   
 ## Limit playbook to run on one or more hosts
 
 This is required when one wants to run a playbook against a host group, but only against one or more members of that group.
