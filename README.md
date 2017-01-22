@@ -633,14 +633,14 @@ In the PLAY RECAP above here you can see how many task were executed and how man
   
 The [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml) playbook uses the 'smtp email password' stored in '[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)' (emailpassword: <password>). But you probably don't want to store passwords with a git repo (and push them to github). You can work around this issue by specifying the password when you run the playbook:  
 ````
-ansible-playbook installbasics.yml --extra-vars "emailpassword=<your password>"  
+$ ansible-playbook installbasics.yml --extra-vars "emailpassword=<your password>"  
 ````
    
 Same methode is useful while executing the [installpiaware.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installpiaware.yml) playbook:
 ````
-ansible-playbook installpiaware.yml --extra-vars "piawarepassword=<yourpassword>"
+$ ansible-playbook installpiaware.yml --extra-vars "piawarepassword=<yourpassword>"
 ````
-If you don't specify the --extra-vars "piawarepassword=<yourpassword>" option,this playbook will use the value that is specified in '[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)'.  
+If you don't specify the --extra-vars "piawarepassword=<yourpassword>" option, this playbook will use the 'piawarepassword' variable value that is specified in '[group_vars/all](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/all)'.  
    
 ## Limit playbook to run on one or more hosts
 
