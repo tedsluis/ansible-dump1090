@@ -650,25 +650,25 @@ This is required when one wants to run a playbook against a host group, but only
 #### Limit to one host
   
 ```
-ansible-playbook installbasics.yml --limit "raspberry-5"
+$ ansible-playbook installbasics.yml --limit "raspberry-5"
 ````
   
 #### Limit to multiple hosts
   
 ````
-ansible-playbook installbasics.yml --limit "raspberry-2,orangepi-6"
+$ ansible-playbook installbasics.yml --limit "raspberry-2,orangepi-6"
 ````
   
 Negated limit. NOTE: Single quotes MUST be used to prevent bash interpolation.
   
 ````
-ansible-playbook installbasics.yml --limit 'all:!raspberry-3'
+$ ansible-playbook installbasics.yml --limit 'all:!raspberry-3'
 ```
   
 #### Limit to host group
   
 ````
-ansible-playbook installbasics.yml --limit 'dump1090'
+$ ansible-playbook installbasics.yml --limit 'dump1090'
 ````
   
 ## Changing settings on multiple hosts
