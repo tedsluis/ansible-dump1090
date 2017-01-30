@@ -3,4 +3,5 @@ dump1090_repository: https://github.com/tedsluis/dump1090.git
 
 # config files roles/dump1090-configure/files:
 defaultdump1090mutability: dump1090-mutability.my
+dump1090name: dump1090-mutability_1.15~dev_armhf.deb
 configjs: config.js.my
