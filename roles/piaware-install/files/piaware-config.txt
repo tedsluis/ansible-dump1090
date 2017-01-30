@@ -1,7 +1,7 @@
-# This file was created automatically during an upgrade from PiAware 
+# This file was created automatically during an upgrade from PiAware
 # Additional piaware configuration settings may be added below.
 
-allow-manual-updates yes  
+allow-manual-updates yes
 allow-auto-updates no
-flightaware-user tedsluis  
-flightaware-password <yourpassword>  
+flightaware-user tedsluis
+flightaware-password <yourpassword>
