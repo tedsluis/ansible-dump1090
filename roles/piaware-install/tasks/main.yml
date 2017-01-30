@@ -52,7 +52,7 @@
     regexp: 'flightaware-password'
     state: present
     insertafter: 'flightaware-user'
-    line: "flightaware-user {{ piawarepassword }}"
+    line: "flightaware-password {{ piawarepassword }}"
   become: true
 
 # http://docs.ansible.com/ansible/service_module.html
