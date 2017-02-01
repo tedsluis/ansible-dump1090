@@ -42,6 +42,36 @@
     mode: 0644
   become: true
 
+# http://docs.ansible.com/ansible/shell_module.html
+
+# Check for RTL usb device and save it
+- name: "Check for RTL usb device."
+  shell: "lsusb | grep 0bda"
+  register: usbdev
+  ignore_errors: yes
+
+# http://docs.ansible.com/ansible/lineinfile_module.html 
+
+# Set DEVICE='' if RTL usb device exists
+- name: "Set DEVICE='' if RTL usb device exists."
+  lineinfile:
+    dest: '/etc/default/dump1090-mutability'
+    regexp: '^DEVICE='
+    state: present
+    line: 'DEVICE=""'
+  when: usbdev.rc == 0
+  become: true
+
+# Set 'DEVICE=none' if RTL usb device not exists
+- name: "Set 'DEVICE=none' if RTL usb device not exists."
+  lineinfile:
+    dest: '/etc/default/dump1090-mutability'
+    regexp: '^DEVICE='
+    state: present
+    line: 'DEVICE="none"'
+  when: usbdev.rc != 0
+  become: true
+
 # Copies files/config.js to /usr/share/dump1090-mutability/html/config.js
 - name: "Copies files/{{ configjs }} to /usr/share/dump1090-mutability/html/config.js."
   copy:
