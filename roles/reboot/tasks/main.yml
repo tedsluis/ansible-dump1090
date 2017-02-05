@@ -4,10 +4,18 @@
 
 # http://docs.ansible.com/ansible/shell_module.html
 
-# Wait and reboot
-- name: "Wait {{ rebootdelay }} minutes and reboot."
-  shell: "sleep {{ rebootdelay }}m && reboot"
+# wait and reboot 
+- name: "wait and reboot."
+  shell: sleep 10 && sudo /sbin/shutdown -r "+{{ (rebootdelay+1) }}" "Reboot triggered by ansible..."
+  async: 0
+  poll: 0
+  ignore_errors: true
   become: true
 
+# http://docs.ansible.com/ansible/wait_for_module.html
 
+# Waiting for the host to come back
+- name: "Waiting for the host to come back."
+  local_action: wait_for host={{ ansible_default_ipv4.address }} port=22 state=started delay={{ (rebootdelay*60+90) }} timeout=600
+  become: false
 

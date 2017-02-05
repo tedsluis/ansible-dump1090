@@ -2,5 +2,5 @@
 # ted.sluis@gmail.com
 
 # 3 minute reboot delay
-rebootdelay: "3"
+rebootdelay: 3
 

@@ -2,4 +2,4 @@
 # ted.sluis@gmail.com
 
 # No reboot delay
-rebootdelay: "0"
+rebootdelay: 0
