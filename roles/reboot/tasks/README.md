@@ -4,10 +4,11 @@ Playbook [reboot](https://github.com/tedsluis/ansible-dump1090/blob/master/roles
 * First batch immediately.  
 * Second batch after 3 minutes.  
 * Third batch after 6 minutes.  
+  
 Hosts gets 1 minute extra delay to cancel reboot.  
 Playbook checks whether the reboot is successful.  
  
-Ansible inventory file<br>[hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/hosts)<br>sections|group_vars|reboot delay (minutes)|
+Ansible inventory file '[hosts](https://github.com/tedsluis/ansible-dump1090/blob/master/hosts)' sections|group_vars|reboot delay (minutes)|
 ---------------------------------|-------|--------|
 reboot-order-first|[group_vars/reboot-order-first](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-first)|0+1|
 reboot-order-second|[group_vars/reboot-order-second](https://github.com/tedsluis/ansible-dump1090/blob/master/group_vars/reboot-order-second)|3+1|
