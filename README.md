@@ -73,7 +73,7 @@ pi@raspberry-1:~ $ sudo apt-get install ansible
 ````
 Check here the installation notes for all linux distro's: http://docs.ansible.com/ansible/intro_installation.html  
 
-By default it stores its configuration files in /etc/ansible. By we will change this in a minute (see below).  
+By default it stores its configuration files in /etc/ansible. But we will change this in a minute (see below).  
     
 ## Configure SSH key pair 
   
@@ -159,14 +159,21 @@ Check the results:
 ````
 pi@raspberry-1:~/git/ansible-dump1090 $ ls -l
 total 80
--rw-r--r--. 1 tedsluis tedsluis 14035 Dec 27 21:50 ansible.cfg
-drwxr-xr-x. 2 tedsluis tedsluis  4096 Dec 27 17:23 group_vars
--rw-r--r--. 1 tedsluis tedsluis   718 Dec 28 08:45 hosts
--rw-rw-r--. 1 tedsluis tedsluis   119 Dec 28 07:02 installbasics.yml
--rw-rw-r--. 1 tedsluis tedsluis   396 Dec 28 06:43 installdump1090.yml
--rw-r--r--. 1 tedsluis tedsluis 35141 May 22  2016 LICENSE
--rw-r--r--. 1 tedsluis tedsluis  5702 Dec 28 10:34 README.md
-drwxr-xr-x. 7 tedsluis tedsluis  4096 Dec 28 06:38 roles
+-rw-rw-r--.  1 tedsluis tedsluis 14030 Dec 29 09:52 ansible.cfg
+-rw-rw-r--.  1 tedsluis tedsluis   140 Jan  8 10:14 builddump1090.yml
+-rw-rw-r--.  1 tedsluis tedsluis   134 Jan  8 10:14 configuredump1090.yml
+-rw-rw-r--.  1 tedsluis tedsluis   446 Jan  8 10:14 fullinstalldump1090.yml
+drwxr-xr-x.  2 tedsluis tedsluis  4096 Feb  3 15:18 group_vars
+-rw-rw-r--.  1 tedsluis tedsluis  1145 Jan 22 21:06 hosts
+-rw-rw-r--.  1 tedsluis tedsluis   196 Jan  8 10:14 installbasics.yml
+-rw-rw-r--.  1 tedsluis tedsluis   164 Jan  8 17:13 installdump1090-socket30003.yml
+-rw-rw-r--.  1 tedsluis tedsluis   233 Jan  8 10:14 installdump1090.yml
+-rw-rw-r--.  1 tedsluis tedsluis   142 Jan  8 10:14 installdump-tools.yml
+-rw-rw-r--.  1 tedsluis tedsluis   125 Jan  8 10:14 installpiaware.yml
+-rw-r--r--.  1 tedsluis tedsluis 35141 May 22  2016 LICENSE
+-rw-rw-r--.  1 tedsluis tedsluis 33505 Feb  8 23:32 README.md
+-rw-rw-r--.  1 tedsluis tedsluis   110 Jan  7 07:05 reboot.yml
+drwxr-xr-x. 11 tedsluis tedsluis  4096 Jan  8 16:19 roles
 pi@raspberry-1:~/git/ansible-dump1090 $ pwd
 /home/pi/git/ansible-dump1090
 ````
@@ -237,7 +244,7 @@ raspberry-5
   
 # dump1090.socket30003 (collects flight data for heatmap)
 [socket30003]
-ted1090-6
+orangepi-6
 ````
   
 ## Test Ansible
@@ -296,7 +303,7 @@ raspberry-1 | SUCCESS | rc=0 >>
  
 Before you run my playbooks, you should inspect what you are about to execute!  
   
-This way you can list all the playbook task:  
+This way you can list all the playbook tasks:  
 ````
 $ ansible-playbook --list-tasks installbasics.yml
 
@@ -343,7 +350,7 @@ You may want to try the playbooks on a fresh SD card before run it on your exist
   
 And you should set some default variables like: username, email, hostnames, git repo, etc. You can find the configuration files with variables in '$Home/git/ansible-dump1090/group_vars'.  
   
-In the example you can view the output of a playbook that run on all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)). 
+In the example below you can view the output of a playbook that runs on all hosts (as configured in [installbasics.yml](https://github.com/tedsluis/ansible-dump1090/blob/master/installbasics.yml)). 
 ````
 $ ansible-playbook installbasics.yml
 
@@ -627,7 +634,7 @@ raspberry-5                  : ok=30   changed=1    unreachable=0    failed=0
 orangepi-6                   : ok=30   changed=13   unreachable=0    failed=0   
 orangepi-7                   : ok=30   changed=13   unreachable=0    failed=0 
 ````
-In the PLAY RECAP above here you can see how many task were executed and how many actual change something on each individual host.  
+In the PLAY RECAP above here you can see how many tasks were executed and how many actual changed something on each individual host.  
   
 #### Specify passwords
   
@@ -680,7 +687,7 @@ $  ansible all -a "sudo sed -i 's/AuthPass=<password>/AuthPass=<your password>/'
     
 ## Logging
   
-Logging is written to '/tmp/ansible.log'.  
+Ansible logging is written to '/tmp/ansible.log'.   
   
 You can disable logging by putting a # in front of 'log_path=/tmp/ansible.log' in the ansible.cfg file.  
   
