@@ -329,6 +329,7 @@ playbook: installbasics.yml
       basics : Insert alias etc into .profile.
       basics : Insert alias git into .profile.
       basics : Insert alias log into .profile.
+      basics : Insert alias rsync into .profile.
       basics : Set vim syntax no (globaly).
       basics : Update /etc/hosts from inventory.
       basics : schedule apt-get update & upgrade every cronjob friday 0am.

@@ -41,6 +41,12 @@
     regexp: '^alias log='
     state: present
     line: 'alias log="cd /var/log"'
+- name: Insert alias rsync into .profile
+  lineinfile:
+    dest: '/home/pi/.profile'
+    regexp: '^alias rsync='
+    state: present
+    line: 'alias rsync="rsync -azvr"'
 
 
 
