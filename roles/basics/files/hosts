@@ -1,18 +1,10 @@
-# Host file (could be replaced by your own /etc/hosts file.
+127.0.0.1      localhost.localdomain localhost
+::1            localhost6.localdomain6 localhost6
+192.168.11.172 ted1090-1
+192.168.11.176 ted1090-2
+192.168.11.171 ted1090-3
+192.168.11.178 ted1090-4
+192.168.11.174 ted1090-5
+192.168.11.175 ted1090-6
+192.168.11.177 ted1090-7
 
-127.0.0.1       localhost
-::1             localhost ip6-localhost ip6-loopback
-ff02::1         ip6-allnodes
-ff02::2         ip6-allrouters
-192.168.11.1   WRT-bachstraat20
-192.168.11.27  pavilion
-192.168.11.38  nasted
-192.168.11.37  ted1090-1
-192.168.11.34  ted1090-2
-192.168.11.43  ted1090-3
-192.168.11.17  ted1090-4
-192.168.11.35  ted1090-5
-192.168.11.36  ted1090-6
-192.168.11.39  ted1090-7
-192.168.11.80  msi msi
-192.168.11.100 nuc
