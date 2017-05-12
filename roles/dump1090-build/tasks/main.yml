@@ -26,8 +26,9 @@
 
 # build dump1090 from source
 - name: "build dump1090 from source {{ builddirectory }}/dump1090."
-  shell: dpkg-buildpackage -b
+  shell: sudo dpkg-buildpackage -b
   args:
     chdir: "{{ builddirectory }}/dump1090"
   environment:
     DEBIAN_FRONTEND: noninteractive
+  become: true
